@@ -47,8 +47,8 @@
           <div>
             <p class="eyebrow">TU ASISTENTE DE CLASE</p>
             <h2>¡Hola, Mr. Arias!</h2>
-            <p>Prepara clases más dinámicas con objetivos claros, instrucciones listas para decir y actividades adaptadas a tus alumnos.</p>
-            <button class="button button-primary" data-go="planner" type="button">Crear una planeación <span>→</span></button>
+            <p>Abre el grado y la lección del día. La planeación se prepara automáticamente con los datos disponibles del Teacher’s Guide.</p>
+            <button class="button button-primary" data-go="planner" type="button">Seleccionar una clase <span>→</span></button>
           </div>
           <div class="welcome-illustration"><img src="assets/fox-teacher.png" alt="Zorro docente de LingoQuest"></div>
         </div>
@@ -73,9 +73,9 @@
             <h3>🧭 Cómo usar esta versión</h3>
             <ol class="steps">
               <li>Selecciona el grado y la unidad.</li>
-              <li>Completa el objetivo y las actividades.</li>
-              <li>Guarda la planeación en este navegador.</li>
-              <li>Imprime una copia para llevar al salón.</li>
+              <li>Abre la lección y genera la planeación automáticamente.</li>
+              <li>Consulta las páginas, materiales y pistas de audio indicadas.</li>
+              <li>Imprime la planeación generada.</li>
             </ol>
           </article>
         </div>
@@ -165,11 +165,22 @@
         </article>
       </section>
 
-      <section id="libraryView" class="view hidden">
+
+      <section id="lessonHubView" class="view hidden">
+        <div class="page-heading">
+          <p class="eyebrow">CLASES POR GRADO</p>
+          <h2 id="hubTitle">Lecciones</h2>
+          <p id="hubSubtitle">Selecciona una lección para consultar los datos y generar su planeación.</p>
+          <input type="hidden" id="hubGrade" value="1">
+          <button class="button button-outline" data-go="dashboard" type="button">← Volver a los grados</button>
+        </div>
+        <div id="lessonHubGrid" class="library-grid"></div>
+      </section>
+\n      <section id="libraryView" class="view hidden">
         <div class="page-heading">
           <p class="eyebrow">CATÁLOGO DOCENTE</p>
           <h2>Biblioteca Elfin 1–6</h2>
-          <p>Los grados y los recursos están separados. Los títulos de unidades deben confirmarse contra los documentos originales antes de completar el catálogo.</p>
+          <p>Consulta materiales, recursos y contenido docente por grado. Las unidades se incorporarán conforme se indexen las guías originales.</p>
         </div>
         <div class="filter-row">
           <label>Filtrar por grado
