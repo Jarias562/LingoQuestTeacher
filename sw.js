@@ -1,4 +1,4 @@
-const CACHE_NAME = "lingoquest-teacher-v2";
+const CACHE_NAME = "lingoquest-teacher-v3";
 const APP_FILES = [
   "./",
   "./index.html",
@@ -7,7 +7,7 @@ const APP_FILES = [
   "./manifest.webmanifest",
   "./icons/icon-192.png",
   "./icons/icon-512.png",
-  "./assets/fox-teacher.png"
+  "./assets/fox-teacher.svg"
 ];
 self.addEventListener("install", (event) => {
   event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(APP_FILES)));
