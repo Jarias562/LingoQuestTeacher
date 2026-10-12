@@ -6,3 +6,14 @@
 
 /* Elfin Teacher's Guide detail viewer */
 .resource-detail{margin-top:12px;padding:14px;border-radius:14px;background:#f4f7fc;border:1px solid #dbe5f4;color:#1e293b;font-size:.94rem;line-height:1.55}.resource-detail h4{margin:12px 0 5px;color:#1d4e89;font-size:.95rem}.resource-detail h4:first-child{margin-top:0}.resource-detail ul,.resource-detail ol{padding-left:22px;margin:6px 0 10px}.resource-detail li{margin:4px 0}.detail-toggle{margin-top:10px;margin-right:6px}
+
+/* Lesson-first teacher workflow */
+.lesson-card{display:flex;flex-direction:column;gap:12px}
+.lesson-quick{border-top:1px solid var(--line);padding-top:8px}
+.lesson-quick p{margin:8px 0 5px}
+.lesson-quick ul{margin:4px 0 10px;padding-left:20px}
+.lesson-quick li{margin:4px 0;line-height:1.45}
+.progress-label{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:.9rem;color:var(--muted)}
+.progress-label select{max-width:145px;padding:9px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink)}
+.lesson-card .button{width:100%;white-space:normal}
+#hubGrade{display:none}
