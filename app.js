@@ -73,12 +73,12 @@ function renderLessonHub(){
 function autoGeneratePlan(key){
  const l=verifiedLessons.find(x=>x.grade+"-"+x.unit===key);if(!l)return;
  $("gradeSelect").value=l.grade;$("unitInput").value=l.unit;$("topicInput").value=l.topic;
- $("objectiveInput").value=l.outcomes.map((x,i)=>(i+1)+". "+x).join("\\n");
- $("vocabInput").value=l.vocab.join(", ");$("materialsInput").value=l.materials.join("\\n");
+ $("objectiveInput").value=l.outcomes.map((x,i)=>(i+1)+". "+x).join("\n");
+ $("vocabInput").value=l.vocab.join(", ");$("materialsInput").value=l.materials.join("\n");
  $("warmupInput").value=l.sequence.find(x=>/warm-up/i.test(x[0]))?.slice(1).join(": ")||"No se especifica una actividad de warm-up independiente en el extracto indexado de la guía.";
- $("presentInput").value=l.sequence.filter(x=>/look and learn|before reading|before you read|let’s listen/i.test(x[0])).map(x=>x[0]+": "+x[2]).join("\\n")||"Consultar la secuencia completa de la guía docente.";
- $("gameInput").value=l.sequence.filter(x=>/game|activity|do it/i.test(x[0])).map(x=>x[0]+": "+x[2]).join("\\n")||"La guía consultada no indica un juego independiente en el extracto indexado.";
- $("practiceInput").value=l.sequence.map(x=>x[0]+(x[1]&&x[1]!=="—"? " ("+x[1]+")":"")+": "+x[2]).join("\\n");
+ $("presentInput").value=l.sequence.filter(x=>/look and learn|before reading|before you read|let’s listen/i.test(x[0])).map(x=>x[0]+": "+x[2]).join("\n")||"Consultar la secuencia completa de la guía docente.";
+ $("gameInput").value=l.sequence.filter(x=>/game|activity|do it/i.test(x[0])).map(x=>x[0]+": "+x[2]).join("\n")||"La guía consultada no indica un juego independiente en el extracto indexado.";
+ $("practiceInput").value=l.sequence.map(x=>x[0]+(x[1]&&x[1]!=="—"? " ("+x[1]+")":"")+": "+x[2]).join("\n");
  $("exitInput").value="La guía consultada no especifica un exit ticket independiente.";
  $("closingInput").value="Revisar las respuestas y cerrar conforme a las indicaciones completas del Teacher’s Guide.";
  $("assessmentInput").value="Evidencia basada en los objetivos de aprendizaje de la guía: "+l.outcomes.join(" ");
@@ -93,10 +93,7 @@ function renderGrades() {
       <h3>${g.name}</h3><p>${g.book} · ${g.desc}</p>
     </button>`).join("");
   document.querySelectorAll("[data-grade]").forEach(btn => btn.addEventListener("click", () => {
-    $("gradeSelect").value = btn.dataset.grade;
-    $("libraryGradeFilter").value = btn.dataset.grade;
-    showView("library");
-    renderLibrary();
+    openGradeHub(btn.dataset.grade);
   }));
 }
 function renderLibrary() {
