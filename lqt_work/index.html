@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#172554">
+  <meta name="description" content="LingoQuest Teacher — herramienta para organizar clases de inglés de primaria.">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon-192.png" type="image/png">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <title>LingoQuest Teacher — By Mr. Arias</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand-mark" aria-hidden="true">📘</div>
+    <div class="brand-copy">
+      <div class="eyebrow">BY MR. ARIAS</div>
+      <h1>LingoQuest <span>Teacher</span></h1>
+    </div>
+    <div class="topbar-actions">
+      <button id="shareBtn" class="button button-light" type="button">↗ Compartir</button>
+      <button id="installBtn" class="button button-light" type="button" hidden>⬇ Instalar app</button>
+      <button id="printBtn" class="button button-light" type="button">🖨️ Imprimir planeación</button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <aside class="sidebar">
+      <p class="nav-label">MENÚ DOCENTE</p>
+      <button class="nav-item active" data-view="dashboard">🏠 <span>Inicio</span></button>
+      <button class="nav-item" data-view="planner">🗓️ <span>Planeación de clase</span></button>
+      <button class="nav-item" data-view="library">📚 <span>Biblioteca Elfin 1–6</span></button>
+      <button class="nav-item" data-view="activities">🎲 <span>Ideas de actividades</span></button>
+      <div class="sidebar-note">
+        <strong>Primera versión</strong>
+        <p>Organizador docente local. Los datos de esta versión se guardan en este navegador.</p>
+      </div>
+    </aside>
+
+    <section class="content">
+      <section id="dashboardView" class="view">
+        <div class="welcome-panel">
+          <div>
+            <p class="eyebrow">TU ASISTENTE DE CLASE</p>
+            <h2>¡Hola, Mr. Arias!</h2>
+            <p>Prepara clases más dinámicas con objetivos claros, instrucciones listas para decir y actividades adaptadas a tus alumnos.</p>
+            <button class="button button-primary" data-go="planner" type="button">Crear una planeación <span>→</span></button>
+          </div>
+          <div class="welcome-illustration" aria-hidden="true">🦉</div>
+        </div>
+
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">GRADOS ESCOLARES</p>
+            <h2>Selecciona un grado</h2>
+          </div>
+          <span class="muted">Primaria · 1.º a 6.º</span>
+        </div>
+        <div class="grade-grid" id="gradeGrid"></div>
+
+        <div class="two-column">
+          <article class="panel">
+            <h3>⚡ Accesos rápidos</h3>
+            <button class="quick-link" data-go="planner" type="button">＋ Preparar una clase <span>→</span></button>
+            <button class="quick-link" data-go="library" type="button">▤ Consultar recursos por grado <span>→</span></button>
+            <button class="quick-link" data-go="activities" type="button">✦ Buscar una dinámica para clase <span>→</span></button>
+          </article>
+          <article class="panel">
+            <h3>🧭 Cómo usar esta versión</h3>
+            <ol class="steps">
+              <li>Selecciona el grado y la unidad.</li>
+              <li>Completa el objetivo y las actividades.</li>
+              <li>Guarda la planeación en este navegador.</li>
+              <li>Imprime una copia para llevar al salón.</li>
+            </ol>
+          </article>
+        </div>
+      </section>
+
+      <section id="plannerView" class="view hidden">
+        <div class="page-heading">
+          <p class="eyebrow">PREPARACIÓN DE CLASE</p>
+          <h2>Planeación docente</h2>
+          <p>Usa esta ficha como base y ajusta el contenido al libro y la unidad correspondientes.</p>
+        </div>
+        <form id="plannerForm" class="panel planner-form">
+          <div class="form-grid">
+            <label>Grado
+              <select id="gradeSelect" required>
+                <option value="1">1.º de primaria — Elfin 1</option>
+                <option value="2">2.º de primaria — Elfin 2</option>
+                <option value="3">3.º de primaria — Elfin 3</option>
+                <option value="4">4.º de primaria — Elfin 4</option>
+                <option value="5">5.º de primaria — Elfin 5</option>
+                <option value="6">6.º de primaria — Elfin 6</option>
+              </select>
+            </label>
+            <label>Unidad / lección
+              <input id="unitInput" placeholder="Ej. Unit 1 — My Toys" required>
+            </label>
+            <label>Fecha
+              <input id="dateInput" type="date">
+            </label>
+            <label>Duración
+              <select id="durationSelect">
+                <option>30 minutos</option><option>40 minutos</option><option selected>50 minutos</option><option>60 minutos</option>
+              </select>
+            </label>
+            <label class="full">Tema
+              <input id="topicInput" placeholder="Ej. Greetings, colors, animals…" required>
+            </label>
+            <label class="full">Objetivo de aprendizaje
+              <textarea id="objectiveInput" rows="2" placeholder="Al finalizar, los alumnos podrán…" required></textarea>
+            </label>
+            <label class="full">Vocabulario / lenguaje clave
+              <textarea id="vocabInput" rows="2" placeholder="Palabras, expresiones o estructuras del libro"></textarea>
+            </label>
+          </div>
+          <div class="section-heading compact"><h3>Secuencia didáctica</h3><span class="muted">Edita cada etapa</span></div>
+          <div class="sequence-grid">
+            <label><span class="step-time">5 min</span> Warm-up / bienvenida
+              <textarea id="warmupInput" rows="3">Saluda en inglés. Usa una canción corta o una rutina oral para activar conocimientos previos.</textarea>
+            </label>
+            <label><span class="step-time">10 min</span> Presentación
+              <textarea id="presentInput" rows="3">Presenta de 4 a 8 palabras o una estructura breve con gestos, imágenes y repetición.</textarea>
+            </label>
+            <label><span class="step-time">15 min</span> Juego principal
+              <textarea id="gameInput" rows="3">Organiza una actividad oral o de movimiento en la que todos tengan turnos para participar.</textarea>
+            </label>
+            <label><span class="step-time">10 min</span> Práctica / worksheet
+              <textarea id="practiceInput" rows="3">Usa la hoja de trabajo del libro o una actividad imprimible relacionada con el objetivo.</textarea>
+            </label>
+            <label><span class="step-time">5 min</span> Exit ticket
+              <textarea id="exitInput" rows="3">Pide a cada alumno señalar, decir o reconocer una palabra o expresión de la clase.</textarea>
+            </label>
+            <label><span class="step-time">5 min</span> Cierre
+              <textarea id="closingInput" rows="3">Repasa el objetivo, reconoce el esfuerzo y despide al grupo en inglés.</textarea>
+            </label>
+          </div>
+          <div class="form-grid lower-fields">
+            <label>Materiales
+              <textarea id="materialsInput" rows="2">Celular, bocina, flashcards y lápices.</textarea>
+            </label>
+            <label>Evaluación / evidencia
+              <textarea id="assessmentInput" rows="2">Registrar: logrado, en proceso o necesita apoyo.</textarea>
+            </label>
+            <label class="full">Notas para el maestro
+              <textarea id="notesInput" rows="2" placeholder="Adaptaciones, páginas del libro, pista de audio, tarea…"></textarea>
+            </label>
+          </div>
+          <div class="form-actions">
+            <button class="button button-primary" type="submit">Guardar planeación</button>
+            <button class="button button-outline" id="clearBtn" type="button">Limpiar ficha</button>
+          </div>
+          <p id="saveMessage" class="save-message" role="status" aria-live="polite"></p>
+        </form>
+
+        <article class="panel saved-panel">
+          <div class="section-heading compact"><h3>Planeaciones guardadas</h3><span id="savedCount" class="muted">0</span></div>
+          <div id="savedPlans" class="saved-plans"><p class="muted">Todavía no hay planeaciones guardadas.</p></div>
+        </article>
+      </section>
+
+      <section id="libraryView" class="view hidden">
+        <div class="page-heading">
+          <p class="eyebrow">CATÁLOGO DOCENTE</p>
+          <h2>Biblioteca Elfin 1–6</h2>
+          <p>Los grados y los recursos están separados. Los títulos de unidades deben confirmarse contra los documentos originales antes de completar el catálogo.</p>
+        </div>
+        <div class="filter-row">
+          <label>Filtrar por grado
+            <select id="libraryGradeFilter">
+              <option value="all">Todos los grados</option>
+              <option value="1">1.º — Elfin 1</option><option value="2">2.º — Elfin 2</option><option value="3">3.º — Elfin 3</option>
+              <option value="4">4.º — Elfin 4</option><option value="5">5.º — Elfin 5</option><option value="6">6.º — Elfin 6</option>
+            </select>
+          </label>
+          <label>Buscar tema o recurso
+            <input id="librarySearch" placeholder="Ej. audio, worksheet, Unit 1">
+          </label>
+        </div>
+        <div id="libraryGrid" class="library-grid"></div>
+        <div class="notice">Importante: esta biblioteca es una estructura inicial. No contiene copias de los libros ni importa automáticamente los archivos adjuntos. Añadiremos cada recurso cuando esté identificado y verificado.</div>
+      </section>
+
+      <section id="activitiesView" class="view hidden">
+        <div class="page-heading">
+          <p class="eyebrow">PARTICIPACIÓN ACTIVA</p>
+          <h2>Banco de actividades</h2>
+          <p>Dinámicas sencillas para usar con celular, bocina y flashcards. Elige una actividad y adapta el vocabulario a la lección del día.</p>
+        </div>
+        <div class="filter-row">
+          <label>Duración
+            <select id="activityDuration"><option value="all">Cualquier duración</option><option value="5">5 minutos</option><option value="10">10 minutos</option><option value="15">15 minutos</option></select>
+          </label>
+          <label>Material
+            <select id="activityMaterial"><option value="all">Cualquier material</option><option value="audio">Celular / bocina</option><option value="cards">Flashcards</option><option value="none">Sin materiales</option></select>
+          </label>
+        </div>
+        <div id="activityGrid" class="activity-grid"></div>
+      </section>
+      <footer> LingoQuest Teacher · By Mr. Arias <span>Primera versión · Los datos se guardan localmente</span></footer>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
