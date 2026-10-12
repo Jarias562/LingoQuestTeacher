@@ -31,3 +31,14 @@ La dirección esperada será `https://TU-USUARIO.github.io/LingoQuestTeacher/`, 
 - Implementar exportación PDF más completa, calendarios y rúbricas.
 - Definir cómo compartir el catálogo con LingoQuest Student sin modificar el repositorio Student.
 - Añadir almacenamiento seguro solo cuando sea necesario.
+
+## Instalación en Android (PWA)
+
+Esta versión incluye manifest, iconos y service worker para que el sitio pueda instalarse como aplicación web en navegadores compatibles. Después de publicar los archivos en GitHub Pages:
+
+1. Abre `https://jarias562.github.io/LingoQuestTeacher/` en Google Chrome en Android.
+2. Toca el menú ⋮ y selecciona **Instalar aplicación** o **Añadir a pantalla de inicio**.
+3. Confirma la instalación. El icono LQ Teacher aparecerá en el celular.
+4. Usa **Compartir** dentro de la app o envía el enlace del sitio por WhatsApp a otros docentes.
+
+Nota: esta aplicación inicial guarda las planeaciones en el almacenamiento local del navegador/dispositivo. Compartir el enlace permite que otros maestros instalen su propia copia, pero no sincroniza automáticamente las planeaciones entre personas o dispositivos.

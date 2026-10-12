@@ -4,6 +4,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#172554">
+  <meta name="description" content="LingoQuest Teacher — herramienta para organizar clases de inglés de primaria.">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon-192.png" type="image/png">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
   <title>LingoQuest Teacher — By Mr. Arias</title>
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -14,7 +21,11 @@
       <div class="eyebrow">BY MR. ARIAS</div>
       <h1>LingoQuest <span>Teacher</span></h1>
     </div>
-    <button id="printBtn" class="button button-light" type="button">🖨️ Imprimir planeación</button>
+    <div class="topbar-actions">
+      <button id="shareBtn" class="button button-light" type="button">↗ Compartir</button>
+      <button id="installBtn" class="button button-light" type="button" hidden>⬇ Instalar app</button>
+      <button id="printBtn" class="button button-light" type="button">🖨️ Imprimir planeación</button>
+    </div>
   </header>
 
   <main class="layout">

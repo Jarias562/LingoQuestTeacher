@@ -111,3 +111,43 @@ function renderSavedPlans(){
 function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
 $("printBtn").addEventListener("click",()=>{showView("planner");window.print();});
 renderGrades();renderLibrary();renderActivities();renderSavedPlans();
+
+
+// Instalación como aplicación web (PWA) y opción para compartir.
+let installPromptEvent = null;
+const installButton = document.getElementById("installBtn");
+const shareButton = document.getElementById("shareBtn");
+window.addEventListener("beforeinstallprompt", (event) => {
+  event.preventDefault();
+  installPromptEvent = event;
+  installButton.hidden = false;
+});
+installButton?.addEventListener("click", async () => {
+  if (!installPromptEvent) {
+    alert("En Android, abre esta página en Chrome, toca ⋮ y selecciona ‘Instalar aplicación’ o ‘Añadir a pantalla de inicio’. ");
+    return;
+  }
+  installPromptEvent.prompt();
+  await installPromptEvent.userChoice;
+  installPromptEvent = null;
+  installButton.hidden = true;
+});
+window.addEventListener("appinstalled", () => {
+  installButton.hidden = true;
+  installPromptEvent = null;
+});
+shareButton?.addEventListener("click", async () => {
+  const shareData = {title: "LingoQuest Teacher — By Mr. Arias", text: "Prueba LingoQuest Teacher, una herramienta para organizar clases de inglés.", url: window.location.href};
+  try {
+    if (navigator.share) await navigator.share(shareData);
+    else if (navigator.clipboard?.writeText) {
+      await navigator.clipboard.writeText(window.location.href);
+      alert("¡Enlace copiado! Ya puedes pegarlo en WhatsApp o enviarlo a tus compañeros.");
+    } else {
+      window.prompt("Copia este enlace para compartir LingoQuest Teacher:", window.location.href);
+    }
+  } catch (error) { if (error.name !== "AbortError") alert("Puedes compartir este enlace: " + window.location.href); }
+});
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js").catch(() => {}));
+}
