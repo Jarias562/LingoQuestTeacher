@@ -39,53 +39,95 @@ function showView(name) {
 document.querySelectorAll("[data-view]").forEach(btn => btn.addEventListener("click", () => showView(btn.dataset.view)));
 document.querySelectorAll("[data-go]").forEach(btn => btn.addEventListener("click", () => showView(btn.dataset.go)));
 
-const verifiedLessons = [{"grade":"1","unit":"Let’s Start!","pages":"6–7","topic":"Alphabet and classroom language","outcomes":["Master the alphabet with “The Alphabet Song.”","Master writing the alphabet."],"focus":"Listening, Speaking, Vocabulary","vocab":["alphabet","letters","vowels","consonants"],"materials":["Student Book","Audio CD / Track 01","CD player","Worksheet 0-1","Elfin flashcards (optional)"],"sequence":[["Warm-up","5 minutes","Ask students if they know the alphabet; invite them to recite it; introduce the lesson."],["Look and Learn","5 minutes","Use page 6. Ask students to recognize, say, and point to the letters."],["Listen and Point","5 minutes","Play Track 01. Students follow the letters, point, and repeat; sing the alphabet song."],["Let’s Do It!","15 minutes","Use page 7. Students identify pictures and trace letters, following arrow direction and order."],["Worksheet 0-1","10 minutes","Explain vowels and consonants. Students color words beginning with vowels red and consonants blue; check answers."]],"script":["Do you know your alphabet?","Let’s say the alphabet together.","Today, we will learn about the alphabet.","Can you recognize all the letters?","Listen to the CD and look at the letters.","Trace over the letters."]},{"grade":"2","unit":"Weather","pages":"6–7","topic":"Weather vocabulary and expressions","outcomes":["Learn words relating to weather and use them correctly."],"focus":"Listening, Vocabulary","vocab":["weather","sunny","rainy","cloudy","windy","snowy","stormy","foggy"],"materials":["Student Book","Audio CD","CD player","Stickers","Elfin flashcards (optional)"],"sequence":[["Look and Learn","—","Present the weather vocabulary using the Student Book visuals."],["Let’s Do It!","page 7","Listen, trace, and match the weather expressions and pictures."]],"script":[]},{"grade":"3","unit":"My Toys","pages":"6–7","topic":"Toy vocabulary, reading and invitations","outcomes":["Read and write the names of some toys.","Read and understand a passage about toys in a toy box."],"focus":"Listening, Reading, Vocabulary","vocab":["robot","spaceship","puppet","teddy bear","yo-yo","dollhouse","toy box","share","favorite","doll","car","train set","play"],"materials":["Student Book","Audio CD / Track 01, 02, 03","CD player","English dictionary","Unknown Word List 1","Worksheet 1-1"],"sequence":[["Warm-up","5 minutes","Introduce toys; ask which toys students like and who they play with."],["Let’s Listen A","10 minutes · page 6","Discuss the pictures, play Track 01, check the correct picture, then listen again and repeat."],["Let’s Listen B","10 minutes · page 6","Name and spell the pictured toys; play Track 02 and complete missing letters; repeat each word."],["Let’s Read","15 minutes · page 7","Skim the passage, play Track 03, listen once, then listen again and repeat each sentence."],["Unknown Word List 1","As indicated","Students identify known words, guess unfamiliar meanings, consult a dictionary, complete the table, and check answers."]],"script":["Do you like toys? What toys do you like?","Who do you play your toys with?","Today, we are going to learn the names of some toys. We will also read a passage about toys in a toy box.","Listen to the CD and check the correct picture.","Listen to the passage and repeat after each sentence."]},{"grade":"4","unit":"Music Club","pages":"6–7","topic":"Musical instruments and music clubs","outcomes":["Read and write the names of musical instruments.","Read and understand a passage about music clubs."],"focus":"Listening, Reading, Vocabulary","vocab":["music club","flute","guitar","drums","harmonica","accordion","tambourine","xylophone","leader","beat","gather","practice","member"],"materials":["Student Book","Audio CD / Track 01, 02","CD player","English dictionary","Unknown Word List 1","Worksheet 1-1"],"sequence":[["Warm-up","5 minutes","Introduce the topic of musical instruments."],["Let’s Listen A","— · page 6","Listen and check the correct picture."],["Let’s Listen B","— · page 6","Listen and unscramble letters to form instrument names. Audio tracks 01 and 02 are indicated in the guide."]],"script":[]},{"grade":"5","unit":"Plants","pages":"6–7","topic":"Plants as living things and plant vocabulary","outcomes":["Learn words related to plants.","Read and learn about plants as living things.","Use vocabulary-building strategies to expand word knowledge."],"focus":"Reading, Listening, Speaking, Vocabulary","vocab":["plants","flower","seed","leaves"],"materials":["Student Book","Audio CD","CD player","Vocabulary notebook (page 110)"],"sequence":[["Before reading","—","Introduce the unit about plants and activate prior knowledge."],["Reading to Learn","pages 6–7","Use the unit reading and vocabulary shown in the Student Book. Refer to the Teacher’s Guide for the full sequence."]],"script":[]},{"grade":"6","unit":"Deserts","pages":"6–7","topic":"Deserts: climate, landforms, plants and animals","outcomes":["Learn words related to deserts.","Read and learn about the climate and features of deserts.","Use vocabulary-building strategies to expand word knowledge."],"focus":"Reading, Listening, Speaking, Vocabulary","vocab":["rainfall","climate","lakes","rivers","temperature","hot","cactus","camel","sand","land"],"materials":["Student Book","Audio CD / Track 01","CD player","Vocabulary notebook (page 110)","World map or globe"],"sequence":[["Before You Read","— · page 7","Listen to words related to deserts; the guide lists cactus, camel, hot, land, sand, and temperature."],["Reading to Learn","pages 6–7","Read “What Is a Desert?” and use the map/globe to discuss desert climate and features. Refer to the guide for the complete lesson sequence."]],"script":[]}];
+const preliminaryLessons = [{"grade":"1","unit":"Let’s Start!","pages":"6–7","topic":"Alphabet and classroom language","outcomes":["Master the alphabet with “The Alphabet Song.”","Master writing the alphabet."],"focus":"Listening, Speaking, Vocabulary","vocab":["alphabet","letters","vowels","consonants"],"materials":["Student Book","Audio CD / Track 01","CD player","Worksheet 0-1","Elfin flashcards (optional)"],"sequence":[["Warm-up","5 minutes","Ask students if they know the alphabet; invite them to recite it; introduce the lesson."],["Look and Learn","5 minutes","Use page 6. Ask students to recognize, say, and point to the letters."],["Listen and Point","5 minutes","Play Track 01. Students follow the letters, point, and repeat; sing the alphabet song."],["Let’s Do It!","15 minutes","Use page 7. Students identify pictures and trace letters, following arrow direction and order."],["Worksheet 0-1","10 minutes","Explain vowels and consonants. Students color words beginning with vowels red and consonants blue; check answers."]],"script":["Do you know your alphabet?","Let’s say the alphabet together.","Today, we will learn about the alphabet.","Can you recognize all the letters?","Listen to the CD and look at the letters.","Trace over the letters."]},{"grade":"2","unit":"Weather","pages":"6–7","topic":"Weather vocabulary and expressions","outcomes":["Learn words relating to weather and use them correctly."],"focus":"Listening, Vocabulary","vocab":["weather","sunny","rainy","cloudy","windy","snowy","stormy","foggy"],"materials":["Student Book","Audio CD","CD player","Stickers","Elfin flashcards (optional)"],"sequence":[["Look and Learn","—","Present the weather vocabulary using the Student Book visuals."],["Let’s Do It!","page 7","Listen, trace, and match the weather expressions and pictures."]],"script":[]},{"grade":"3","unit":"My Toys","pages":"6–7","topic":"Toy vocabulary, reading and invitations","outcomes":["Read and write the names of some toys.","Read and understand a passage about toys in a toy box."],"focus":"Listening, Reading, Vocabulary","vocab":["robot","spaceship","puppet","teddy bear","yo-yo","dollhouse","toy box","share","favorite","doll","car","train set","play"],"materials":["Student Book","Audio CD / Track 01, 02, 03","CD player","English dictionary","Unknown Word List 1","Worksheet 1-1"],"sequence":[["Warm-up","5 minutes","Introduce toys; ask which toys students like and who they play with."],["Let’s Listen A","10 minutes · page 6","Discuss the pictures, play Track 01, check the correct picture, then listen again and repeat."],["Let’s Listen B","10 minutes · page 6","Name and spell the pictured toys; play Track 02 and complete missing letters; repeat each word."],["Let’s Read","15 minutes · page 7","Skim the passage, play Track 03, listen once, then listen again and repeat each sentence."],["Unknown Word List 1","As indicated","Students identify known words, guess unfamiliar meanings, consult a dictionary, complete the table, and check answers."]],"script":["Do you like toys? What toys do you like?","Who do you play your toys with?","Today, we are going to learn the names of some toys. We will also read a passage about toys in a toy box.","Listen to the CD and check the correct picture.","Listen to the passage and repeat after each sentence."]},{"grade":"4","unit":"Music Club","pages":"6–7","topic":"Musical instruments and music clubs","outcomes":["Read and write the names of musical instruments.","Read and understand a passage about music clubs."],"focus":"Listening, Reading, Vocabulary","vocab":["music club","flute","guitar","drums","harmonica","accordion","tambourine","xylophone","leader","beat","gather","practice","member"],"materials":["Student Book","Audio CD / Track 01, 02","CD player","English dictionary","Unknown Word List 1","Worksheet 1-1"],"sequence":[["Warm-up","5 minutes","Introduce the topic of musical instruments."],["Let’s Listen A","— · page 6","Listen and check the correct picture."],["Let’s Listen B","— · page 6","Listen and unscramble letters to form instrument names. Audio tracks 01 and 02 are indicated in the guide."]],"script":[]},{"grade":"5","unit":"Plants","pages":"6–7","topic":"Plants as living things and plant vocabulary","outcomes":["Learn words related to plants.","Read and learn about plants as living things.","Use vocabulary-building strategies to expand word knowledge."],"focus":"Reading, Listening, Speaking, Vocabulary","vocab":["plants","flower","seed","leaves"],"materials":["Student Book","Audio CD","CD player","Vocabulary notebook (page 110)"],"sequence":[["Before reading","—","Introduce the unit about plants and activate prior knowledge."],["Reading to Learn","pages 6–7","Use the unit reading and vocabulary shown in the Student Book. Refer to the Teacher’s Guide for the full sequence."]],"script":[]},{"grade":"6","unit":"Deserts","pages":"6–7","topic":"Deserts: climate, landforms, plants and animals","outcomes":["Learn words related to deserts.","Read and learn about the climate and features of deserts.","Use vocabulary-building strategies to expand word knowledge."],"focus":"Reading, Listening, Speaking, Vocabulary","vocab":["rainfall","climate","lakes","rivers","temperature","hot","cactus","camel","sand","land"],"materials":["Student Book","Audio CD / Track 01","CD player","Vocabulary notebook (page 110)","World map or globe"],"sequence":[["Before You Read","— · page 7","Listen to words related to deserts; the guide lists cactus, camel, hot, land, sand, and temperature."],["Reading to Learn","pages 6–7","Read “What Is a Desert?” and use the map/globe to discuss desert climate and features. Refer to the guide for the complete lesson sequence."]],"script":[]}];
+
+const elfin1UnitNames = ["Let’s Start!","Farm Animals","Numbers and Age","Colors and Clothes","Seven Days","Food","My Body","Classroom","Shapes"];
+const fullElfin1Lessons = (window.elfin1CatalogRows || []).map(row => {
+  const [unitNo, pageStart, pdfPage, lessonTitle, topic, focus, vocabText, materialsText, stepsText] = row;
+  const sequence = (stepsText || "").split(";").filter(Boolean).map(step => {
+    const match = step.match(/^(.*?)(?:\|(\d+))?$/);
+    const name = (match?.[1] || step).trim();
+    const minutes = match?.[2] ? Number(match[2]) : null;
+    return [name, minutes ? minutes + " minutes" : "See guide", "See the original instructions and Teacher’s Script on Teacher’s Guide PDF page " + (pdfPage + 1) + "."];
+  });
+  const duration = sequence.reduce((sum, item) => sum + (parseInt(item[1], 10) || 0), 0);
+  return {
+    id: "g1-p" + pageStart, grade: "1", unitNo, unit: elfin1UnitNames[unitNo] || "Elfin 1",
+    pages: pageStart + "–" + (pageStart + 1), pdfPage, teacherPdfPage: pdfPage + 1, lessonTitle, topic,
+    outcomes: [topic], focus: focus || "Not specified in the indexed section",
+    vocab: vocabText ? vocabText.split(";").map(x => x.trim()).filter(Boolean) : [],
+    materials: materialsText ? materialsText.split(";").map(x => x.trim()).filter(Boolean) : [],
+    sequence, script: [], duration: duration || null
+  };
+});
+const verifiedLessons = [...fullElfin1Lessons, ...preliminaryLessons.filter(item => item.grade !== "1")];
+function lessonKeyOf(lesson) { return lesson.id || (lesson.grade + "-" + lesson.unit); }
+
+
+/* Original Elfin 1 Teacher's Guide is stored in the teacher's browser only. */
+let guidePdfBlob=null,guidePdfObjectUrl=null,guidePdfLoadPromise=null,activePdfMode="book";
+function openGuideDb(){return new Promise((resolve,reject)=>{if(!("indexedDB" in window)){reject(new Error("IndexedDB unavailable"));return;}const request=indexedDB.open("LingoQuestTeacherLocalFiles",1);request.onupgradeneeded=()=>{const db=request.result;if(!db.objectStoreNames.contains("pdfs"))db.createObjectStore("pdfs");};request.onsuccess=()=>resolve(request.result);request.onerror=()=>reject(request.error||new Error("DB open failed"));});}
+async function saveGuidePdfToBrowser(file){const db=await openGuideDb();await new Promise((resolve,reject)=>{const tx=db.transaction("pdfs","readwrite");tx.objectStore("pdfs").put(file,"elfin1TeacherGuide");tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error||new Error("DB write failed"));});db.close();}
+async function readGuidePdfFromBrowser(){const db=await openGuideDb();const blob=await new Promise((resolve,reject)=>{const tx=db.transaction("pdfs","readonly");const request=tx.objectStore("pdfs").get("elfin1TeacherGuide");request.onsuccess=()=>resolve(request.result||null);request.onerror=()=>reject(request.error||new Error("DB read failed"));});db.close();return blob;}
+async function ensureLocalGuideLoaded(){if(guidePdfBlob)return guidePdfBlob;if(guidePdfLoadPromise)return guidePdfLoadPromise;guidePdfLoadPromise=readGuidePdfFromBrowser().then(blob=>{if(blob){guidePdfBlob=blob;guidePdfObjectUrl=URL.createObjectURL(blob);}return blob;}).catch(()=>null).finally(()=>{guidePdfLoadPromise=null;});return guidePdfLoadPromise;}
+function showGuidePdfPage(mode){
+ activePdfMode=mode;const lesson=verifiedLessons.find(x=>lessonKeyOf(x)===activeLessonKey),status=$("guidePdfStatus"),frame=$("guidePdfFrame");
+ if(!lesson||!lesson.pdfPage){status.textContent="El visor de páginas originales está disponible actualmente para Elfin 1.";frame.classList.add("hidden");return;}
+ if(!guidePdfBlob||!guidePdfObjectUrl){status.textContent="Carga tu archivo Elfin 1 Teacher’s Guide PDF una sola vez. Se guardará solo en este navegador y no se subirá a GitHub.";frame.classList.add("hidden");return;}
+ const page=mode==="teacher"?lesson.teacherPdfPage:lesson.pdfPage;frame.src=guidePdfObjectUrl+"#page="+page+"&zoom=page-fit";frame.classList.remove("hidden");status.textContent=(mode==="teacher"?"Lesson Plan / Teacher’s Script":"Páginas del Student Book y ficha de la guía")+" · PDF p. "+page+" · Student Book pp. "+lesson.pages+". Archivo guardado localmente.";
+}
+$("guidePdfInput").addEventListener("change",async()=>{const file=$("guidePdfInput").files&&$("guidePdfInput").files[0];if(!file)return;const signature=await file.slice(0,5).text().catch(()=> "");if(!file.name.toLowerCase().endsWith(".pdf")&&signature!=="%PDF-"){$("guidePdfStatus").textContent="Selecciona un PDF válido de Elfin 1 Teacher’s Guide.";return;}try{await saveGuidePdfToBrowser(file);if(guidePdfObjectUrl)URL.revokeObjectURL(guidePdfObjectUrl);guidePdfBlob=file;guidePdfObjectUrl=URL.createObjectURL(file);$("guidePdfStatus").textContent="PDF guardado localmente. Ya puedes abrir las páginas originales por lección.";showGuidePdfPage(activePdfMode);}catch(error){$("guidePdfStatus").textContent="No se pudo guardar el PDF en este navegador. Selecciónalo de nuevo e inténtalo otra vez."; }});
+$("showBookPdfBtn").addEventListener("click",()=>showGuidePdfPage("book"));
+$("showTeacherPdfBtn").addEventListener("click",()=>showGuidePdfPage("teacher"));
+
 const lessonProgressKey = "lqtLessonProgressV1";
 function readProgress(){try{return JSON.parse(localStorage.getItem(lessonProgressKey)||"{}")}catch(e){return {}}}
 function saveProgress(p){localStorage.setItem(lessonProgressKey,JSON.stringify(p))}
+
 function openGradeHub(grade){
-  const g=gradeInfo.find(x=>x.id===grade);
-  $("hubTitle").textContent = g ? g.name + " · " + g.book : "Lecciones";
-  $("hubSubtitle").textContent = "Consulta el contenido disponible de la guía y genera la planeación desde esa fuente. Las propuestas extra se identifican por separado.";
+  const g=gradeInfo.find(x=>x.id===grade),items=verifiedLessons.filter(x=>x.grade===grade);
+  $("hubTitle").textContent=g ? g.name+" · "+g.book : "Lecciones";
+  $("hubSubtitle").textContent=grade==="1" ? "Catálogo completo de Elfin 1 Teacher’s Guide: sección inicial, 8 unidades y sus repasos. Elige una lección para abrir sus páginas originales." : "Elfin 1 está indexado completo; los otros grados se incorporarán al verificar sus guías.";
   $("hubGrade").value=grade;
-  showView("lessonHub");
-  renderLessonHub();
+  const filter=$("hubUnitFilter"),choices=new Map();
+  items.forEach(item=>{const value=String(item.unitNo===undefined?item.unit:item.unitNo);const label=item.unitNo===0?"Let’s Start!":(item.unitNo?"Unit "+item.unitNo+" — "+item.unit:item.unit);if(!choices.has(value))choices.set(value,label);});
+  filter.innerHTML='<option value="all">Todas las unidades y lecciones</option>'+Array.from(choices.entries()).map(([value,label])=>'<option value="'+escapeHtml(value)+'">'+escapeHtml(label)+'</option>').join("");
+  filter.value="all";showView("lessonHub");renderLessonHub();
 }
 function renderLessonHub(){
- const grade=$("hubGrade").value;
- const items=verifiedLessons.filter(x=>x.grade===grade);
- const p=readProgress();
- $("lessonHubGrid").innerHTML=items.map((l)=> {
-   const key=l.grade+"-"+l.unit;
-   const status=p[key]||"Pendiente";
-   return `<article class="resource-card lesson-card">
-    <div class="resource-head"><div class="resource-icon">📖</div><div><span class="muted">Unidad 1 · páginas ${l.pages}</span><h3>${escapeHtml(l.unit)}</h3></div></div>
-    <p><strong>${escapeHtml(l.topic)}</strong></p>
-    <div class="tag-row"><span class="tag">${escapeHtml(l.focus)}</span><span class="tag">${escapeHtml(status)}</span></div>
-    <div class="lesson-quick"><p><strong>Objetivos de la guía</strong></p><ul>${l.outcomes.map(x=>`<li>${escapeHtml(x)}</li>`).join("")}</ul><p><strong>Materiales</strong></p><p>${l.materials.map(escapeHtml).join(" · ")}</p></div>
-    <label class="progress-label">Estado de la lección <select class="lesson-progress" data-key="${escapeHtml(key)}"><option ${status==="Pendiente"?"selected":""}>Pendiente</option><option ${status==="En curso"?"selected":""}>En curso</option><option ${status==="Completada"?"selected":""}>Completada</option></select></label>
-    <button class="button button-primary auto-plan" data-lesson="${escapeHtml(key)}" type="button">Abrir guía y planeación →</button>
-   </article>`;
- }).join("");
+ const grade=$("hubGrade").value,filterValue=$("hubUnitFilter").value;
+ const items=verifiedLessons.filter(x=>x.grade===grade&&(filterValue==="all"||String(x.unitNo===undefined?x.unit:x.unitNo)===filterValue)),p=readProgress();
+ $("lessonHubGrid").innerHTML=items.map(l=>{
+  const key=lessonKeyOf(l),status=p[key]||"Pendiente",unitLabel=l.unitNo===0?"Introducción":(l.unitNo?"Unit "+l.unitNo:"Lección"),sourcePages=l.pdfPage?" · guía PDF p. "+l.pdfPage:"";
+  return `<article class="resource-card lesson-card">
+   <div class="resource-head"><div class="resource-icon">📖</div><div><span class="muted">${escapeHtml(unitLabel)} · Student Book pp. ${escapeHtml(l.pages||"sin indicar")}${escapeHtml(sourcePages)}</span><h3>${escapeHtml(l.lessonTitle||l.unit)}</h3></div></div>
+   <p><strong>${escapeHtml(l.topic||"Lección de la guía")}</strong></p>
+   <div class="tag-row"><span class="tag">${escapeHtml(l.focus||"Skills por verificar")}</span><span class="tag">${escapeHtml(status)}</span></div>
+   <div class="lesson-quick"><p><strong>Objetivo / resumen de la guía</strong></p><ul>${(l.outcomes||[]).map(x=>`<li>${escapeHtml(x)}</li>`).join("")}</ul><p><strong>Materiales</strong></p><p>${(l.materials||[]).map(escapeHtml).join(" · ")||"Consulta la página original del Teacher’s Guide."}</p></div>
+   <label class="progress-label">Estado de la lección <select class="lesson-progress" data-key="${escapeHtml(key)}"><option ${status==="Pendiente"?"selected":""}>Pendiente</option><option ${status==="En curso"?"selected":""}>En curso</option><option ${status==="Completada"?"selected":""}>Completada</option></select></label>
+   <button class="button button-primary auto-plan" data-lesson="${escapeHtml(key)}" type="button">Abrir guía y planeación →</button>
+  </article>`;
+ }).join("")||'<p class="muted">No hay lecciones para este filtro.</p>';
  document.querySelectorAll(".lesson-progress").forEach(el=>el.addEventListener("change",()=>{const p=readProgress();p[el.dataset.key]=el.value;saveProgress(p);renderLessonHub()}));
  document.querySelectorAll(".auto-plan").forEach(btn=>btn.addEventListener("click",()=>openLessonDetails(btn.dataset.lesson)));
 }
 
+
 let activeLessonKey = "";
 function openLessonDetails(key){
- const l=verifiedLessons.find(x=>x.grade+"-"+x.unit===key);if(!l)return;
+ const l=verifiedLessons.find(x=>lessonKeyOf(x)===key);if(!l)return;
  activeLessonKey=key;
- $("detailTitle").textContent=gradeInfo.find(g=>g.id===l.grade).book+" · "+l.unit;
- $("detailSubtitle").textContent=l.topic;
- $("guidePages").textContent="Páginas "+l.pages;
+ $("detailTitle").textContent=gradeInfo.find(g=>g.id===l.grade).book+" · "+(l.lessonTitle||l.unit);
+ $("detailSubtitle").textContent=l.topic||"Consulta las páginas de la guía docente.";
+ $("guidePages").textContent=(l.pages?"Student Book pp. "+l.pages:"Páginas no indicadas")+(l.pdfPage?" · Teacher’s Guide PDF p. "+l.pdfPage:"");
  const list=(title,items)=>items&&items.length?'<h3>'+escapeHtml(title)+'</h3><ul>'+items.map(x=>'<li>'+escapeHtml(x)+'</li>').join("")+'</ul>':"";
- $("guideContent").innerHTML=list("Learning outcomes",l.outcomes)+'<h3>Language focus</h3><p>'+escapeHtml(l.focus||"No especificado en el extracto disponible")+'</p>'+list("Vocabulary",l.vocab)+list("Materials needed for this lesson",l.materials)+'<h3>Lesson Plan — secuencia disponible</h3><ol>'+l.sequence.map(x=>'<li><strong>'+escapeHtml(x[0])+(x[1]&&x[1]!=="—"?' · '+escapeHtml(x[1]):"")+'</strong><p>'+escapeHtml(x[2])+'</p></li>').join("")+'</ol>'+list("Teacher’s Script",l.script);
- $("planPreview").innerHTML='<p><strong>Objetivo:</strong> '+l.outcomes.map(escapeHtml).join(" ")+'</p><p><strong>Enfoque:</strong> '+escapeHtml(l.focus)+'</p><p><strong>Vocabulario:</strong> '+l.vocab.map(escapeHtml).join(", ")+'</p><p><strong>Materiales:</strong> '+l.materials.map(escapeHtml).join(", ")+'</p><ol>'+l.sequence.map(x=>'<li><strong>'+escapeHtml(x[0])+(x[1]&&x[1]!=="—"?' ('+escapeHtml(x[1])+')':"")+'</strong><p>'+escapeHtml(x[2])+'</p></li>').join("")+'</ol>';
- const extras=[{title:"Repaso oral por turnos",desc:"Complementaria · 5 minutos",steps:"Los alumnos responden por turnos usando el vocabulario y objetivo de esta lección."},{title:"Práctica en parejas",desc:"Complementaria · 5–10 minutos",steps:"En parejas, practican la habilidad objetivo; el maestro escucha y registra quién necesita apoyo."},{title:"Exit ticket",desc:"Complementaria · 3 minutos",steps:"Cada alumno demuestra individualmente una palabra o habilidad del objetivo de aprendizaje."}];
+ $("guideContent").innerHTML=list("Objetivo / resumen",l.outcomes)+'<h3>Language focus</h3><p>'+escapeHtml(l.focus||"No especificado")+'</p>'+list("Vocabulary",l.vocab)+list("Materials needed for this lesson",l.materials)+'<h3>Lesson Plan — apartados localizados en la guía</h3><ol>'+l.sequence.map(x=>'<li><strong>'+escapeHtml(x[0])+(x[1]&&x[1]!=="—"?' · '+escapeHtml(x[1]):"")+'</strong><p>'+escapeHtml(x[2])+'</p></li>').join("")+'</ol>'+list("Teacher’s Script",l.script);
+ $("planPreview").innerHTML='<p><strong>Lección:</strong> '+escapeHtml(l.lessonTitle||l.unit)+' · páginas '+escapeHtml(l.pages||"por verificar")+'</p><p><strong>Objetivo:</strong> '+(l.outcomes||[]).map(escapeHtml).join(" ")+'</p><p><strong>Enfoque:</strong> '+escapeHtml(l.focus||"No especificado")+'</p><p><strong>Vocabulario:</strong> '+(l.vocab||[]).map(escapeHtml).join(", ")+'</p><p><strong>Materiales:</strong> '+(l.materials||[]).map(escapeHtml).join(", ")+'</p><ol>'+l.sequence.map(x=>'<li><strong>'+escapeHtml(x[0])+(x[1]&&x[1]!=="—"?' ('+x[1]+')':"")+'</strong><p>'+escapeHtml(x[2])+'</p></li>').join("")+'</ol>';
+ const extras=[{title:"Repaso oral por turnos",desc:"Complementaria · 5 minutos",steps:"Practicar por turnos usando el objetivo y vocabulario de esta lección."},{title:"Práctica en parejas",desc:"Complementaria · 5–10 minutos",steps:"En parejas, practicar la habilidad objetivo mientras el maestro observa y registra apoyos necesarios."},{title:"Exit ticket",desc:"Complementaria · 3 minutos",steps:"Cada alumno demuestra individualmente una palabra o habilidad del objetivo."}];
  $("extraActivities").innerHTML=extras.map(x=>'<article class="extra-activity"><strong>'+x.title+'</strong><span class="tag">'+x.desc+'</span><p>'+x.steps+'</p></article>').join("");
  document.querySelectorAll(".lesson-tab").forEach(b=>b.classList.toggle("active",b.dataset.tab==="guidePanel"));
  document.querySelectorAll(".lesson-tab-panel").forEach(p=>p.classList.toggle("hidden",p.id!=="guidePanel"));
- showView("lessonDetail");
+ showView("lessonDetail");ensureLocalGuideLoaded().then(()=>showGuidePdfPage("book")).catch(()=>{});
 }
 document.querySelectorAll(".lesson-tab").forEach(btn=>btn.addEventListener("click",()=>{
  document.querySelectorAll(".lesson-tab").forEach(b=>b.classList.toggle("active",b===btn));
@@ -93,22 +135,27 @@ document.querySelectorAll(".lesson-tab").forEach(btn=>btn.addEventListener("clic
 }));
 $("backToLessons").addEventListener("click",()=>showView("lessonHub"));
 $("generatePlanFromDetail").addEventListener("click",()=>autoGeneratePlan(activeLessonKey));
+
+
+
 function autoGeneratePlan(key){
- const l=verifiedLessons.find(x=>x.grade+"-"+x.unit===key);if(!l)return;
- $("gradeSelect").value=l.grade;$("unitInput").value=l.unit;$("topicInput").value=l.topic;
- $("objectiveInput").value=l.outcomes.map((x,i)=>(i+1)+". "+x).join("\n");
- $("vocabInput").value=l.vocab.join(", ");$("materialsInput").value=l.materials.join("\n");
- $("warmupInput").value=l.sequence.find(x=>/warm-up/i.test(x[0]))?.slice(1).join(": ")||"No se especifica una actividad de warm-up independiente en el extracto indexado de la guía.";
- $("presentInput").value=l.sequence.filter(x=>/look and learn|before reading|before you read|let’s listen/i.test(x[0])).map(x=>x[0]+": "+x[2]).join("\n")||"Consultar la secuencia completa de la guía docente.";
- $("gameInput").value=l.sequence.filter(x=>/game|activity|do it/i.test(x[0])).map(x=>x[0]+": "+x[2]).join("\n")||"La guía consultada no indica un juego independiente en el extracto indexado.";
- $("practiceInput").value=l.sequence.map(x=>x[0]+(x[1]&&x[1]!=="—"? " ("+x[1]+")":"")+": "+x[2]).join("\n");
- $("exitInput").value="La guía consultada no especifica un exit ticket independiente.";
- $("closingInput").value="Revisar las respuestas y cerrar conforme a las indicaciones completas del Teacher’s Guide.";
- $("assessmentInput").value="Evidencia basada en los objetivos de aprendizaje de la guía: "+l.outcomes.join(" ");
- $("notesInput").value="Fuente: "+gradeInfo.find(g=>g.id===l.grade).book+" Teacher’s Guide. Páginas de la lección: "+l.pages+". Los datos marcados como no especificados deben verificarse en el documento completo.";
- $("durationSelect").value="50 minutos";$("saveMessage").textContent="Planeación generada automáticamente a partir del contenido docente indexado. Verifica los campos señalados como no especificados.";
+ const l=verifiedLessons.find(x=>lessonKeyOf(x)===key);if(!l)return;
+ $("gradeSelect").value=l.grade;$("unitInput").value=l.unit+" — pp. "+(l.pages||"ver guía");$("topicInput").value=(l.lessonTitle?l.lessonTitle+". ":"")+(l.topic||l.unit);
+ $("objectiveInput").value=(l.outcomes||[]).map((x,i)=>(i+1)+". "+x).join("\n");
+ $("vocabInput").value=(l.vocab||[]).join(", ");$("materialsInput").value=(l.materials||[]).join("\n");
+ $("warmupInput").value=l.sequence.find(x=>/warm-up/i.test(x[0]))?.slice(1).join(": ")||"Revisar el warm-up en la página del Teacher’s Guide indicada en la ficha.";
+ $("presentInput").value=l.sequence.filter(x=>/look and learn|before reading|before you read|let’s listen|listen and point/i.test(x[0])).map(x=>x[0]+": "+x[2]).join("\n")||"Consultar la página original indicada del Teacher’s Guide.";
+ $("gameInput").value=l.sequence.filter(x=>/game|activity|do it|chant|speak/i.test(x[0])).map(x=>x[0]+": "+x[2]).join("\n")||"Consultar las actividades indicadas en la guía original.";
+ $("practiceInput").value=l.sequence.map(x=>x[0]+(x[1]&&x[1]!=="—"?" ("+x[1]+")":"")+": "+x[2]).join("\n");
+ $("exitInput").value="Actividad complementaria sugerida: pedir a cada alumno demostrar un objetivo de la lección.";
+ $("closingInput").value=l.sequence.filter(x=>/closing/i.test(x[0])).map(x=>x[0]+": "+x[2]).join("\n")||"Cerrar según las indicaciones del Teacher’s Guide.";
+ $("assessmentInput").value="Observar el logro del objetivo de la guía: "+(l.outcomes||[]).join(" ");
+ $("notesInput").value="Fuente: "+gradeInfo.find(g=>g.id===l.grade).book+" Teacher’s Guide. Student Book pp. "+(l.pages||"no indicadas")+". PDF físico p. "+(l.pdfPage||"no indexada")+"; Lesson Plan / Teacher’s Script en PDF p. "+(l.teacherPdfPage||"consultar guía")+". Abre las páginas escaneadas desde Guía original después de cargar tu PDF en este navegador.";
+ const duration=l.duration?l.duration+" minutos":"50 minutos",select=$("durationSelect");if(!Array.from(select.options).some(o=>o.value===duration)){const option=document.createElement("option");option.value=duration;option.textContent=duration;select.add(option);}select.value=duration;
+ $("saveMessage").textContent="Planeación generada desde el catálogo del Teacher’s Guide. Las actividades adicionales están identificadas como complementarias.";
  showView("planner");
 }
+
 function renderGrades() {
   $("gradeGrid").innerHTML = gradeInfo.map(g => `
     <button class="grade-card" data-grade="${g.id}" type="button">
