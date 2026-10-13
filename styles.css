@@ -17,3 +17,19 @@
 .progress-label select{max-width:145px;padding:9px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink)}
 .lesson-card .button{width:100%;white-space:normal}
 #hubGrade{display:none}
+
+/* Lesson source tabs and source-first planning */
+.lesson-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px}
+.lesson-tab{border:1px solid #d6dfec;background:#fff;color:#34435d;border-radius:11px;padding:12px 15px;font-weight:800;cursor:pointer}
+.lesson-tab.active{background:#172554;color:#fff;border-color:#172554}
+.lesson-tab-panel{padding:clamp(16px,3vw,28px)}
+.source-banner{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:13px 15px;background:#eef4ff;border:1px solid #d5e3ff;border-radius:12px;color:#1d3d76}
+.guide-content{line-height:1.65}
+.guide-content h3{font-size:15px;color:#1d4e89;margin:20px 0 7px}
+.guide-content p{margin:5px 0 10px}
+.guide-content li{margin:7px 0}
+.extra-activities{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.extra-activity{display:flex;flex-direction:column;gap:8px;padding:15px;border:1px solid var(--line);border-radius:12px;background:#fbfcff}
+.extra-activity p{font-size:13px;line-height:1.6;color:var(--muted);margin:0}
+@media(max-width:700px){.extra-activities{grid-template-columns:1fr}.lesson-tab{flex:1;font-size:12px;padding:10px 8px}}
+@media print{.lesson-tabs,#backToLessons,.notice{display:none!important}}
