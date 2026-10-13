@@ -74,3 +74,43 @@
 .schedule-footer strong{font-family:Georgia,serif;font-style:italic;color:#183968;font-size:clamp(15px,1.6vw,22px)}
 .schedule-footer span{font-size:10px;letter-spacing:1.3px;text-transform:uppercase;color:#183968;font-weight:800}
 @media(max-width:720px){.schedule-banner{grid-template-columns:1fr 1fr;gap:14px;padding:16px}.schedule-title{grid-column:1/-1;grid-row:1}.schedule-brand{grid-column:1;grid-row:2}.schedule-teacher{grid-column:2;grid-row:2}.schedule-flag{font-size:34px}.schedule-footer{align-items:flex-start;flex-direction:column}.teacher-schedule-table th,.teacher-schedule-table td{padding:10px 8px}}
+
+/* Compact schedule layout: fit within the LingoQuest dashboard without expanding */
+.teacher-schedule{margin:14px 0 20px;border-radius:14px;box-shadow:0 6px 18px rgba(23,37,84,.07)}
+.schedule-banner{grid-template-columns:1fr 1.35fr 1fr;gap:12px;padding:12px 18px;border-bottom-width:2px}
+.schedule-flag{font-size:32px}
+.schedule-brand strong{font-size:clamp(16px,1.6vw,22px)}
+.schedule-brand span:not(.schedule-flag){font-size:8px;letter-spacing:1.2px;margin-top:3px}
+.schedule-title h2{font-size:clamp(19px,2.2vw,29px)}
+.schedule-title p{font-size:clamp(14px,1.6vw,19px);margin-top:2px}
+.schedule-teacher{padding:6px 8px;border-width:1px}
+.schedule-teacher strong{font-size:clamp(16px,1.6vw,22px)}
+.schedule-teacher span{font-size:8px;letter-spacing:.7px;margin-top:3px}
+.teacher-schedule-table{min-width:0;table-layout:fixed}
+.teacher-schedule-table th,.teacher-schedule-table td{padding:8px 7px;font-size:clamp(11px,.95vw,13px);line-height:1.2}
+.teacher-schedule-table thead th{font-size:clamp(12px,1vw,14px)}
+.teacher-schedule-table thead th:first-child,.teacher-schedule-table tbody th{width:22%}
+.schedule-footer{padding:8px 14px}
+.schedule-footer strong{font-size:clamp(13px,1.25vw,17px)}
+.schedule-footer span{font-size:8px;letter-spacing:.8px}
+@media(max-width:720px){
+ .teacher-schedule{margin:12px 0 16px}
+ .schedule-banner{grid-template-columns:1fr 1fr;gap:8px;padding:10px 12px}
+ .schedule-title{grid-column:1/-1;grid-row:1}
+ .schedule-brand{grid-column:1;grid-row:2}
+ .schedule-teacher{grid-column:2;grid-row:2}
+ .schedule-flag{font-size:27px}
+ .schedule-brand strong{font-size:16px}
+ .schedule-brand span:not(.schedule-flag){font-size:7px;letter-spacing:.5px}
+ .schedule-title h2{font-size:21px}
+ .schedule-title p{font-size:15px}
+ .schedule-teacher strong{font-size:17px}
+ .schedule-teacher span{font-size:7px;letter-spacing:.3px}
+ .teacher-schedule-table{min-width:0}
+ .teacher-schedule-table th,.teacher-schedule-table td{padding:7px 4px;font-size:10px;overflow-wrap:anywhere}
+ .teacher-schedule-table thead th{font-size:10px}
+ .teacher-schedule-table thead th:first-child,.teacher-schedule-table tbody th{width:25%}
+ .schedule-footer{gap:4px;padding:8px 10px}
+ .schedule-footer strong{font-size:13px}
+ .schedule-footer span{font-size:7px}
+}
