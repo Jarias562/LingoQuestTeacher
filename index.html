@@ -171,7 +171,7 @@
           <p class="eyebrow">CLASES POR GRADO</p>
           <h2 id="hubTitle">Lecciones</h2>
           <p id="hubSubtitle">Selecciona una lección para consultar los datos y generar su planeación.</p>
-          <input type="hidden" id="hubGrade" value="1">
+          <input type="hidden" id="hubGrade" value="1"><div class="lesson-filter-inline"><label>Filtrar por unidad<select id="hubUnitFilter"><option value="all">Todas las unidades y lecciones</option></select></label><p><strong>Elfin 1:</strong> 44 bloques de lección indexados · Student Book pp. 6–93</p></div>
           <button class="button button-outline" data-go="dashboard" type="button">← Volver a los grados</button>
         </div>
         <div id="lessonHubGrid" class="library-grid"></div>
@@ -193,7 +193,7 @@
           <div class="source-banner"><strong>Fuente principal: Teacher’s Guide</strong><span id="guidePages"></span></div>
           <p class="muted">Los datos se basan en la guía docente identificada. Los elementos que no estén presentes en el extracto no se completan por suposición.</p>
           <div id="guideContent" class="guide-content"></div>
-          <div class="notice">La imagen escaneada de la página original se añadirá aquí cuando el archivo de la guía se incorpore como recurso público de la aplicación. Por ahora, se muestra la información docente transcrita y verificada.</div>
+          <div class="guide-pdf-tools"><div class="guide-pdf-import"><label for="guidePdfInput"><strong>Abrir páginas originales del Teacher’s Guide</strong><span>Selecciona Elfin 1 Teacher’s Guide.pdf de tu computadora. Se guarda solo en este navegador, no en GitHub.</span></label><input id="guidePdfInput" type="file" accept="application/pdf,.pdf"></div><p id="guidePdfStatus" class="guide-pdf-status" role="status">Todavía no hay un PDF local cargado. Selecciona tu copia para abrir las páginas originales y las instrucciones del maestro.</p><div class="guide-pdf-actions"><button class="button button-outline" id="showBookPdfBtn" type="button">Ver páginas del Student Book</button><button class="button button-outline" id="showTeacherPdfBtn" type="button">Ver Lesson Plan / Teacher’s Script</button></div><iframe id="guidePdfFrame" class="guide-pdf-frame hidden" title="Página original de Elfin 1 Teacher’s Guide"></iframe></div><div class="notice">El catálogo incluye todas las lecciones de Elfin 1. Las páginas escaneadas se muestran desde el PDF que tú selecciones y permanecen en el almacenamiento local; no se publica el libro completo.</div>
         </div>
         <div id="planPanel" class="lesson-tab-panel panel hidden">
           <h3>Planeación generada desde la guía</h3>
@@ -212,7 +212,7 @@
         <div class="page-heading">
           <p class="eyebrow">CATÁLOGO DOCENTE</p>
           <h2>Biblioteca Elfin 1–6</h2>
-          <p>Consulta materiales, recursos y contenido docente por grado. Las unidades se incorporarán conforme se indexen las guías originales.</p>
+          <p>Elfin 1 ya contiene sus 8 unidades, la sección Let’s Start!, las páginas de repaso y sus referencias. Los demás grados se incorporarán al verificar sus guías.</p>
         </div>
         <div class="filter-row">
           <label>Filtrar por grado
@@ -227,7 +227,7 @@
           </label>
         </div>
         <div id="libraryGrid" class="library-grid"></div>
-        <div class="notice">Importante: esta biblioteca es una estructura inicial. No contiene copias de los libros ni importa automáticamente los archivos adjuntos. Añadiremos cada recurso cuando esté identificado y verificado.</div>
+        <div class="notice">El catálogo de Elfin 1 está indexado desde su Teacher’s Guide. Para abrir las páginas escaneadas, selecciona el PDF desde tu computadora en la ficha de una lección; el archivo permanece local.</div>
       </section>
 
       <section id="activitiesView" class="view hidden">
@@ -249,6 +249,7 @@
       <footer> LingoQuest Teacher · By Mr. Arias <span>Primera versión · Los datos se guardan localmente</span></footer>
     </section>
   </main>
+  <script src="data/elfin1-catalog.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
