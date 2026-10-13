@@ -33,3 +33,18 @@
 .extra-activity p{font-size:13px;line-height:1.6;color:var(--muted);margin:0}
 @media(max-width:700px){.extra-activities{grid-template-columns:1fr}.lesson-tab{flex:1;font-size:12px;padding:10px 8px}}
 @media print{.lesson-tabs,#backToLessons,.notice{display:none!important}}
+
+/* Elfin 1 catalog and local original-PDF reader */
+.lesson-filter-inline{display:flex;align-items:end;justify-content:space-between;gap:16px;margin:0 0 18px;padding:14px;background:#eef4ff;border:1px solid #d5e3ff;border-radius:12px}
+.lesson-filter-inline label{display:flex;flex-direction:column;gap:7px;min-width:min(100%,320px);font-size:13px;font-weight:700;color:#34435d}
+.lesson-filter-inline p{margin:0;color:#334a73;font-size:13px}
+.guide-pdf-tools{margin-top:20px;border-top:1px solid var(--line);padding-top:18px}
+.guide-pdf-import{display:grid;grid-template-columns:minmax(0,1fr) minmax(250px,1fr);align-items:center;gap:14px;padding:15px;background:#f7f9fd;border:1px solid var(--line);border-radius:12px}
+.guide-pdf-import label{display:flex;flex-direction:column;gap:6px;font-size:14px;color:#263a5b}
+.guide-pdf-import label span{font-weight:400;font-size:12px;color:var(--muted);line-height:1.5}
+.guide-pdf-import input{font-size:12px;padding:8px}
+.guide-pdf-status{padding:10px 12px;background:#f4f7fb;border-radius:8px;color:#42526d;font-size:12px;line-height:1.5}
+.guide-pdf-actions{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.guide-pdf-actions .button{font-size:12px}
+.guide-pdf-frame{display:block;width:100%;height:min(74vh,900px);min-height:520px;border:1px solid #d9e1ec;border-radius:12px;background:#e9eef5}
+@media(max-width:700px){.lesson-filter-inline{align-items:stretch;flex-direction:column}.guide-pdf-import{grid-template-columns:1fr}.guide-pdf-frame{height:65vh;min-height:360px}.lesson-filter-inline p{font-size:12px}}
