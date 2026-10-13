@@ -12,9 +12,9 @@
   "theme_color": "#172554",
   "icons": [
     {
-      "src": "assets/fox-teacher.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
+      "src": "assets/4e3ae631-e8fa-462b-b5a9-a26fa36da815.png",
+      "sizes": "1024x1024",
+      "type": "image/png",
       "purpose": "any"
     }
   ]
