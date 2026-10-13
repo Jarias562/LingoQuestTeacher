@@ -87,7 +87,8 @@ function showGuidePdfPage(mode){
  if(!guidePdfBlobs[grade]||!guidePdfUrls[grade]){status.textContent="Carga el PDF de Elfin "+grade+" Teacher’s Guide una vez. Se guardará solo en este navegador, no se publicará en GitHub.";frame.classList.add("hidden");return;}
  const page=mode==="teacher"?lesson.teacherPdfPage:lesson.pdfPage;
  frame.src=guidePdfUrls[grade]+"#page="+Math.max(0,page-1)+"&zoom=page-fit";frame.classList.remove("hidden");
- status.textContent=(mode==="teacher"?"Lesson Plan / Teacher’s Script":"Páginas originales del Student Book y Teacher’s Guide")+" · Elfin "+grade+" · PDF p. "+page+" · Student Book pp. "+lesson.pages+". Archivo guardado localmente.";
+ $("openGuidePdfBtn").disabled=false;$("downloadGuidePdfBtn").disabled=false;
+ status.textContent=(mode==="teacher"?"Lesson Plan / Teacher’s Script":"Páginas originales del Student Book y Teacher’s Guide")+" · Elfin "+grade+" · PDF p. "+page+" · Student Book pp. "+lesson.pages+". Si Android no muestra el PDF aquí, usa “Abrir PDF completo” o “Descargar PDF”. Archivo guardado localmente.";
 }
 $("guidePdfInput").addEventListener("change",async()=>{
  const file=$("guidePdfInput").files&&$("guidePdfInput").files[0];if(!file)return;
@@ -97,6 +98,8 @@ $("guidePdfInput").addEventListener("change",async()=>{
  try{await saveGuidePdfToBrowser(file,lesson.grade);if(guidePdfUrls[lesson.grade])URL.revokeObjectURL(guidePdfUrls[lesson.grade]);guidePdfBlobs[lesson.grade]=file;guidePdfUrls[lesson.grade]=URL.createObjectURL(file);$("guidePdfStatus").textContent="Elfin "+lesson.grade+" Teacher’s Guide guardado localmente. Ya puedes abrir sus páginas.";showGuidePdfPage(activePdfMode);}
  catch(error){$("guidePdfStatus").textContent="No se pudo guardar el PDF en este navegador. Selecciónalo de nuevo e inténtalo otra vez.";}
 });
+$("openGuidePdfBtn").addEventListener("click",()=>{const lesson=verifiedLessons.find(x=>lessonKeyOf(x)===activeLessonKey);if(!lesson)return;const url=guidePdfUrls[lesson.grade];if(url)window.open(url+"#page="+Math.max(0,(activePdfMode==="teacher"?lesson.teacherPdfPage:lesson.pdfPage)-1),"_blank");});
+$("downloadGuidePdfBtn").addEventListener("click",()=>{const lesson=verifiedLessons.find(x=>lessonKeyOf(x)===activeLessonKey);if(!lesson)return;const url=guidePdfUrls[lesson.grade];if(!url)return;const a=document.createElement("a");a.href=url;a.download="Elfin-"+lesson.grade+"-Teachers-Guide.pdf";document.body.appendChild(a);a.click();a.remove();});
 $("showBookPdfBtn").addEventListener("click",()=>showGuidePdfPage("book"));
 $("showTeacherPdfBtn").addEventListener("click",()=>showGuidePdfPage("teacher"));
 const lessonProgressKey = "lqtLessonProgressV1";
