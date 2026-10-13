@@ -114,3 +114,13 @@
  .schedule-footer strong{font-size:13px}
  .schedule-footer span{font-size:7px}
 }
+
+.grade-guide-upload{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:14px 0;padding:14px 16px;border:1px solid var(--line);border-radius:14px;background:var(--surface,#fff)}
+.grade-guide-upload-copy{display:flex;flex-direction:column;gap:5px;min-width:0}
+.grade-guide-upload-copy strong{font-size:14px;color:var(--text)}
+.grade-guide-upload-copy span{font-size:12px;line-height:1.45;color:var(--muted)}
+.grade-guide-upload-copy #hubGuideUploadStatus{font-weight:700;color:#8b5e13}
+.grade-guide-upload-copy #hubGuideUploadStatus.guide-ready{color:#18794e}
+.grade-guide-file{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;padding:9px 14px;border-radius:10px;background:#173d78;color:white;font-size:12px;font-weight:800;cursor:pointer}
+.grade-guide-file input{display:none}
+@media(max-width:650px){.grade-guide-upload{align-items:stretch;flex-direction:column;gap:10px}.grade-guide-file{min-height:40px}}
