@@ -48,3 +48,29 @@
 .guide-pdf-actions .button{font-size:12px}
 .guide-pdf-frame{display:block;width:100%;height:min(74vh,900px);min-height:520px;border:1px solid #d9e1ec;border-radius:12px;background:#e9eef5}
 @media(max-width:700px){.lesson-filter-inline{align-items:stretch;flex-direction:column}.guide-pdf-import{grid-template-columns:1fr}.guide-pdf-frame{height:65vh;min-height:360px}.lesson-filter-inline p{font-size:12px}}
+
+/* Mr. Arias weekly school schedule on dashboard */
+.teacher-schedule{margin:24px 0 30px;background:#fff;border:1px solid #d7e1ef;border-radius:18px;overflow:hidden;box-shadow:0 12px 28px rgba(23,37,84,.09)}
+.schedule-banner{display:grid;grid-template-columns:1fr 1.5fr 1fr;align-items:center;gap:18px;padding:22px 24px;background:linear-gradient(110deg,#fff 0%,#f5f8ff 54%,#e7efff 100%);border-bottom:3px solid #c52142}
+.schedule-brand{display:flex;align-items:center;gap:12px;color:#183a70}
+.schedule-flag{font-size:46px;line-height:1}
+.schedule-brand strong{display:block;font-size:clamp(19px,2vw,28px);font-weight:900;letter-spacing:-.5px}
+.schedule-brand span:not(.schedule-flag){display:block;font-size:10px;letter-spacing:2px;color:#c52142;font-weight:800;margin-top:5px}
+.schedule-title{text-align:center}
+.schedule-title h2{margin:0;color:#17366a;font-size:clamp(23px,3vw,39px);font-weight:900;line-height:1.05}
+.schedule-title p{margin:5px 0 0;color:#c52142;font-size:clamp(17px,2vw,25px);font-weight:800}
+.schedule-teacher{text-align:center;padding:9px 12px;border:2px dashed #9bb7e3;border-radius:14px;background:#edf4ff;color:#132f60}
+.schedule-teacher strong{display:block;font-size:clamp(20px,2vw,28px);font-weight:900}
+.schedule-teacher span{display:block;font-size:9px;letter-spacing:1.2px;margin-top:6px;font-weight:800}
+.schedule-table-wrap{overflow-x:auto}
+.teacher-schedule-table{width:100%;border-collapse:collapse;min-width:620px;color:#14233f}
+.teacher-schedule-table th,.teacher-schedule-table td{padding:13px 10px;text-align:center;border:1px solid #b7c6dc;font-size:clamp(12px,1.15vw,15px)}
+.teacher-schedule-table thead th{background:#173d78;color:#fff;font-size:clamp(13px,1.25vw,17px);font-weight:800}
+.teacher-schedule-table thead th:first-child{background:#bf2342}
+.teacher-schedule-table tbody th{background:#e8effb;color:#183968;font-weight:800;white-space:nowrap}
+.teacher-schedule-table tbody tr:nth-child(even) td{background:#f6f8fc}
+.teacher-schedule-table td{font-weight:600}
+.schedule-footer{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 20px;background:#fff}
+.schedule-footer strong{font-family:Georgia,serif;font-style:italic;color:#183968;font-size:clamp(15px,1.6vw,22px)}
+.schedule-footer span{font-size:10px;letter-spacing:1.3px;text-transform:uppercase;color:#183968;font-weight:800}
+@media(max-width:720px){.schedule-banner{grid-template-columns:1fr 1fr;gap:14px;padding:16px}.schedule-title{grid-column:1/-1;grid-row:1}.schedule-brand{grid-column:1;grid-row:2}.schedule-teacher{grid-column:2;grid-row:2}.schedule-flag{font-size:34px}.schedule-footer{align-items:flex-start;flex-direction:column}.teacher-schedule-table th,.teacher-schedule-table td{padding:10px 8px}}
