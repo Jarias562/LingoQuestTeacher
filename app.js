@@ -46,7 +46,7 @@ function saveProgress(p){localStorage.setItem(lessonProgressKey,JSON.stringify(p
 function openGradeHub(grade){
   const g=gradeInfo.find(x=>x.id===grade);
   $("hubTitle").textContent = g ? g.name + " · " + g.book : "Lecciones";
-  $("hubSubtitle").textContent = "Lecciones iniciales extraídas de la guía docente. La información no disponible queda señalada para verificación.";
+  $("hubSubtitle").textContent = "Consulta el contenido disponible de la guía y genera la planeación desde esa fuente. Las propuestas extra se identifican por separado.";
   $("hubGrade").value=grade;
   showView("lessonHub");
   renderLessonHub();
@@ -64,12 +64,35 @@ function renderLessonHub(){
     <div class="tag-row"><span class="tag">${escapeHtml(l.focus)}</span><span class="tag">${escapeHtml(status)}</span></div>
     <div class="lesson-quick"><p><strong>Objetivos de la guía</strong></p><ul>${l.outcomes.map(x=>`<li>${escapeHtml(x)}</li>`).join("")}</ul><p><strong>Materiales</strong></p><p>${l.materials.map(escapeHtml).join(" · ")}</p></div>
     <label class="progress-label">Estado de la lección <select class="lesson-progress" data-key="${escapeHtml(key)}"><option ${status==="Pendiente"?"selected":""}>Pendiente</option><option ${status==="En curso"?"selected":""}>En curso</option><option ${status==="Completada"?"selected":""}>Completada</option></select></label>
-    <button class="button button-primary auto-plan" data-lesson="${escapeHtml(key)}" type="button">Abrir clase y generar planeación →</button>
+    <button class="button button-primary auto-plan" data-lesson="${escapeHtml(key)}" type="button">Abrir guía y planeación →</button>
    </article>`;
  }).join("");
  document.querySelectorAll(".lesson-progress").forEach(el=>el.addEventListener("change",()=>{const p=readProgress();p[el.dataset.key]=el.value;saveProgress(p);renderLessonHub()}));
- document.querySelectorAll(".auto-plan").forEach(btn=>btn.addEventListener("click",()=>autoGeneratePlan(btn.dataset.lesson)));
+ document.querySelectorAll(".auto-plan").forEach(btn=>btn.addEventListener("click",()=>openLessonDetails(btn.dataset.lesson)));
 }
+
+let activeLessonKey = "";
+function openLessonDetails(key){
+ const l=verifiedLessons.find(x=>x.grade+"-"+x.unit===key);if(!l)return;
+ activeLessonKey=key;
+ $("detailTitle").textContent=gradeInfo.find(g=>g.id===l.grade).book+" · "+l.unit;
+ $("detailSubtitle").textContent=l.topic;
+ $("guidePages").textContent="Páginas "+l.pages;
+ const list=(title,items)=>items&&items.length?'<h3>'+escapeHtml(title)+'</h3><ul>'+items.map(x=>'<li>'+escapeHtml(x)+'</li>').join("")+'</ul>':"";
+ $("guideContent").innerHTML=list("Learning outcomes",l.outcomes)+'<h3>Language focus</h3><p>'+escapeHtml(l.focus||"No especificado en el extracto disponible")+'</p>'+list("Vocabulary",l.vocab)+list("Materials needed for this lesson",l.materials)+'<h3>Lesson Plan — secuencia disponible</h3><ol>'+l.sequence.map(x=>'<li><strong>'+escapeHtml(x[0])+(x[1]&&x[1]!=="—"?' · '+escapeHtml(x[1]):"")+'</strong><p>'+escapeHtml(x[2])+'</p></li>').join("")+'</ol>'+list("Teacher’s Script",l.script);
+ $("planPreview").innerHTML='<p><strong>Objetivo:</strong> '+l.outcomes.map(escapeHtml).join(" ")+'</p><p><strong>Enfoque:</strong> '+escapeHtml(l.focus)+'</p><p><strong>Vocabulario:</strong> '+l.vocab.map(escapeHtml).join(", ")+'</p><p><strong>Materiales:</strong> '+l.materials.map(escapeHtml).join(", ")+'</p><ol>'+l.sequence.map(x=>'<li><strong>'+escapeHtml(x[0])+(x[1]&&x[1]!=="—"?' ('+escapeHtml(x[1])+')':"")+'</strong><p>'+escapeHtml(x[2])+'</p></li>').join("")+'</ol>';
+ const extras=[{title:"Repaso oral por turnos",desc:"Complementaria · 5 minutos",steps:"Los alumnos responden por turnos usando el vocabulario y objetivo de esta lección."},{title:"Práctica en parejas",desc:"Complementaria · 5–10 minutos",steps:"En parejas, practican la habilidad objetivo; el maestro escucha y registra quién necesita apoyo."},{title:"Exit ticket",desc:"Complementaria · 3 minutos",steps:"Cada alumno demuestra individualmente una palabra o habilidad del objetivo de aprendizaje."}];
+ $("extraActivities").innerHTML=extras.map(x=>'<article class="extra-activity"><strong>'+x.title+'</strong><span class="tag">'+x.desc+'</span><p>'+x.steps+'</p></article>').join("");
+ document.querySelectorAll(".lesson-tab").forEach(b=>b.classList.toggle("active",b.dataset.tab==="guidePanel"));
+ document.querySelectorAll(".lesson-tab-panel").forEach(p=>p.classList.toggle("hidden",p.id!=="guidePanel"));
+ showView("lessonDetail");
+}
+document.querySelectorAll(".lesson-tab").forEach(btn=>btn.addEventListener("click",()=>{
+ document.querySelectorAll(".lesson-tab").forEach(b=>b.classList.toggle("active",b===btn));
+ document.querySelectorAll(".lesson-tab-panel").forEach(p=>p.classList.toggle("hidden",p.id!==btn.dataset.tab));
+}));
+$("backToLessons").addEventListener("click",()=>showView("lessonHub"));
+$("generatePlanFromDetail").addEventListener("click",()=>autoGeneratePlan(activeLessonKey));
 function autoGeneratePlan(key){
  const l=verifiedLessons.find(x=>x.grade+"-"+x.unit===key);if(!l)return;
  $("gradeSelect").value=l.grade;$("unitInput").value=l.unit;$("topicInput").value=l.topic;
