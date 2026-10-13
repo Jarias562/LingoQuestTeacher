@@ -103,10 +103,27 @@ const lessonProgressKey = "lqtLessonProgressV1";
 function readProgress(){try{return JSON.parse(localStorage.getItem(lessonProgressKey)||"{}")}catch(e){return {}}}
 function saveProgress(p){localStorage.setItem(lessonProgressKey,JSON.stringify(p))}
 
+async function refreshGradeGuideStatus(grade){
+ const blob=await ensureLocalGuideLoaded(grade);const status=$("hubGuideUploadStatus");if($("hubGrade").value!==grade)return;
+ status.textContent=blob?"PDF guardado para Elfin "+grade+" en este navegador. Abre cualquier lección para ver sus páginas.":"Aún no hay un PDF guardado para Elfin "+grade+".";status.classList.toggle("guide-ready",!!blob);
+}
+$("hubGuidePdfInput").addEventListener("change",async()=>{
+ const file=$("hubGuidePdfInput").files&&$("hubGuidePdfInput").files[0];if(!file)return;const grade=$("hubGrade").value;
+ const signature=await file.slice(0,5).text().catch(()=> "");
+ if(!file.name.toLowerCase().endsWith(".pdf")&&signature!=="%PDF-"){$("hubGuideUploadStatus").textContent="Selecciona un archivo PDF válido.";return;}
+ try{await saveGuidePdfToBrowser(file,grade);if(guidePdfUrls[grade])URL.revokeObjectURL(guidePdfUrls[grade]);guidePdfBlobs[grade]=file;guidePdfUrls[grade]=URL.createObjectURL(file);$("hubGuideUploadStatus").textContent="Listo: Teacher’s Guide de Elfin "+grade+" guardado en este navegador.";$("hubGuideUploadStatus").classList.add("guide-ready");}
+ catch(error){$("hubGuideUploadStatus").textContent="No se pudo guardar el PDF. Intenta seleccionarlo de nuevo.";}
+});
+
 function openGradeHub(grade){
   const g=gradeInfo.find(x=>x.id===grade),items=verifiedLessons.filter(x=>x.grade===grade);
   $("hubTitle").textContent=g ? g.name+" · "+g.book : "Lecciones";
-  $("hubSubtitle").textContent=grade==="1" ? "Catálogo completo de Elfin 1 Teacher’s Guide: sección inicial, 8 unidades y sus repasos. Elige una lección para abrir sus páginas originales." : "Elfin 1 está indexado completo; los otros grados se incorporarán al verificar sus guías.";
+  $("hubSubtitle").textContent="Elige una unidad y una lección. Adjunta el Teacher’s Guide de este grado para abrir las páginas originales desde la aplicación.";
+  $("hubGuideUploadTitle").textContent="Adjuntar Teacher’s Guide de Elfin "+grade;
+  $("hubGuideUploadNote").textContent="Selecciona el PDF de Elfin "+grade+" una sola vez. Se guarda en este navegador, separado de los demás grados, y no se publica en GitHub.";
+  $("hubGuidePdfInput").value="";
+  $("hubCatalogCount").innerHTML="<strong>"+items.length+" referencias de lección</strong> · "+(grade==="1"?"Catálogo de Elfin 1":"Catálogo inicial de Elfin "+grade)+"; la ficha detallada debe verificarse con el PDF original.";
+  refreshGradeGuideStatus(grade);
   $("hubGrade").value=grade;
   const filter=$("hubUnitFilter"),choices=new Map();
   items.forEach(item=>{const value=String(item.unitNo===undefined?item.unit:item.unitNo);const label=item.unitNo===0?"Let’s Start!":(item.unitNo?"Unit "+item.unitNo+" — "+item.unit:item.unit);if(!choices.has(value))choices.set(value,label);});
