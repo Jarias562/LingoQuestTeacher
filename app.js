@@ -60,26 +60,45 @@ const fullElfin1Lessons = (window.elfin1CatalogRows || []).map(row => {
     sequence, script: [], duration: duration || null
   };
 });
-const verifiedLessons = [...fullElfin1Lessons, ...preliminaryLessons.filter(item => item.grade !== "1")];
+const fullElfin2to6Lessons = Object.entries(window.elfin2to6Catalog || {}).flatMap(([grade, book]) =>
+  book.units.flatMap((unitTitle, unitIndex) => book.offsets.map((offset, lessonIndex) => {
+    const unitNo=unitIndex+1, pageStart=6+unitIndex*10+lessonIndex*2;
+    const pdfPage=book.starts[unitIndex]+offset, lessonTitle=book.heads[lessonIndex];
+    const focus=book.focus[lessonIndex] || "Consulta la página original de la guía";
+    const review=lessonIndex===4;
+    return {id:"g"+grade+"-p"+pageStart,grade,unitNo,unit:unitTitle,pages:pageStart+"–"+(pageStart+1),pdfPage,teacherPdfPage:pdfPage+1,lessonTitle,topic:review?"Repaso de la unidad "+unitNo+" · "+unitTitle:unitTitle+" — "+lessonTitle,outcomes:[],focus,vocab:[],materials:[],sequence:[["Consultar la página original","Ver guía","Teacher’s Guide: PDF página "+pdfPage+"; revisa objetivos, vocabulario y materiales directamente en la página original."]],script:[],duration:null};
+  }))
+);
+const verifiedLessons = [...fullElfin1Lessons, ...fullElfin2to6Lessons];
 function lessonKeyOf(lesson) { return lesson.id || (lesson.grade + "-" + lesson.unit); }
 
-
-/* Original Elfin 1 Teacher's Guide is stored in the teacher's browser only. */
-let guidePdfBlob=null,guidePdfObjectUrl=null,guidePdfLoadPromise=null,activePdfMode="book";
+/* Each Teacher's Guide is stored separately in this browser; nothing is published publicly. */
+const guidePdfBlobs={},guidePdfUrls={},guidePdfLoads={};
+let activePdfMode="book";
+function guideStorageKey(grade){return "elfin"+grade+"TeacherGuide";}
 function openGuideDb(){return new Promise((resolve,reject)=>{if(!("indexedDB" in window)){reject(new Error("IndexedDB unavailable"));return;}const request=indexedDB.open("LingoQuestTeacherLocalFiles",1);request.onupgradeneeded=()=>{const db=request.result;if(!db.objectStoreNames.contains("pdfs"))db.createObjectStore("pdfs");};request.onsuccess=()=>resolve(request.result);request.onerror=()=>reject(request.error||new Error("DB open failed"));});}
-async function saveGuidePdfToBrowser(file){const db=await openGuideDb();await new Promise((resolve,reject)=>{const tx=db.transaction("pdfs","readwrite");tx.objectStore("pdfs").put(file,"elfin1TeacherGuide");tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error||new Error("DB write failed"));});db.close();}
-async function readGuidePdfFromBrowser(){const db=await openGuideDb();const blob=await new Promise((resolve,reject)=>{const tx=db.transaction("pdfs","readonly");const request=tx.objectStore("pdfs").get("elfin1TeacherGuide");request.onsuccess=()=>resolve(request.result||null);request.onerror=()=>reject(request.error||new Error("DB read failed"));});db.close();return blob;}
-async function ensureLocalGuideLoaded(){if(guidePdfBlob)return guidePdfBlob;if(guidePdfLoadPromise)return guidePdfLoadPromise;guidePdfLoadPromise=readGuidePdfFromBrowser().then(blob=>{if(blob){guidePdfBlob=blob;guidePdfObjectUrl=URL.createObjectURL(blob);}return blob;}).catch(()=>null).finally(()=>{guidePdfLoadPromise=null;});return guidePdfLoadPromise;}
+async function saveGuidePdfToBrowser(file,grade){const db=await openGuideDb();await new Promise((resolve,reject)=>{const tx=db.transaction("pdfs","readwrite");tx.objectStore("pdfs").put(file,guideStorageKey(grade));tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error||new Error("DB write failed"));});db.close();}
+async function readGuidePdfFromBrowser(grade){const db=await openGuideDb();const blob=await new Promise((resolve,reject)=>{const tx=db.transaction("pdfs","readonly");const request=tx.objectStore("pdfs").get(guideStorageKey(grade));request.onsuccess=()=>resolve(request.result||null);request.onerror=()=>reject(request.error||new Error("DB read failed"));});db.close();return blob;}
+async function ensureLocalGuideLoaded(grade){if(guidePdfBlobs[grade])return guidePdfBlobs[grade];if(guidePdfLoads[grade])return guidePdfLoads[grade];guidePdfLoads[grade]=readGuidePdfFromBrowser(grade).then(blob=>{if(blob){guidePdfBlobs[grade]=blob;guidePdfUrls[grade]=URL.createObjectURL(blob);}return blob;}).catch(()=>null).finally(()=>{delete guidePdfLoads[grade];});return guidePdfLoads[grade];}
 function showGuidePdfPage(mode){
  activePdfMode=mode;const lesson=verifiedLessons.find(x=>lessonKeyOf(x)===activeLessonKey),status=$("guidePdfStatus"),frame=$("guidePdfFrame");
- if(!lesson||!lesson.pdfPage){status.textContent="El visor de páginas originales está disponible actualmente para Elfin 1.";frame.classList.add("hidden");return;}
- if(!guidePdfBlob||!guidePdfObjectUrl){status.textContent="Carga tu archivo Elfin 1 Teacher’s Guide PDF una sola vez. Se guardará solo en este navegador y no se subirá a GitHub.";frame.classList.add("hidden");return;}
- const page=mode==="teacher"?lesson.teacherPdfPage:lesson.pdfPage;frame.src=guidePdfObjectUrl+"#page="+page+"&zoom=page-fit";frame.classList.remove("hidden");status.textContent=(mode==="teacher"?"Lesson Plan / Teacher’s Script":"Páginas del Student Book y ficha de la guía")+" · PDF p. "+page+" · Student Book pp. "+lesson.pages+". Archivo guardado localmente.";
+ if(!lesson||!lesson.pdfPage){status.textContent="No hay una referencia de página para esta lección.";frame.classList.add("hidden");return;}
+ const grade=lesson.grade;
+ if(!guidePdfBlobs[grade]||!guidePdfUrls[grade]){status.textContent="Carga el PDF de Elfin "+grade+" Teacher’s Guide una vez. Se guardará solo en este navegador, no se publicará en GitHub.";frame.classList.add("hidden");return;}
+ const page=mode==="teacher"?lesson.teacherPdfPage:lesson.pdfPage;
+ frame.src=guidePdfUrls[grade]+"#page="+Math.max(0,page-1)+"&zoom=page-fit";frame.classList.remove("hidden");
+ status.textContent=(mode==="teacher"?"Lesson Plan / Teacher’s Script":"Páginas originales del Student Book y Teacher’s Guide")+" · Elfin "+grade+" · PDF p. "+page+" · Student Book pp. "+lesson.pages+". Archivo guardado localmente.";
 }
-$("guidePdfInput").addEventListener("change",async()=>{const file=$("guidePdfInput").files&&$("guidePdfInput").files[0];if(!file)return;const signature=await file.slice(0,5).text().catch(()=> "");if(!file.name.toLowerCase().endsWith(".pdf")&&signature!=="%PDF-"){$("guidePdfStatus").textContent="Selecciona un PDF válido de Elfin 1 Teacher’s Guide.";return;}try{await saveGuidePdfToBrowser(file);if(guidePdfObjectUrl)URL.revokeObjectURL(guidePdfObjectUrl);guidePdfBlob=file;guidePdfObjectUrl=URL.createObjectURL(file);$("guidePdfStatus").textContent="PDF guardado localmente. Ya puedes abrir las páginas originales por lección.";showGuidePdfPage(activePdfMode);}catch(error){$("guidePdfStatus").textContent="No se pudo guardar el PDF en este navegador. Selecciónalo de nuevo e inténtalo otra vez."; }});
+$("guidePdfInput").addEventListener("change",async()=>{
+ const file=$("guidePdfInput").files&&$("guidePdfInput").files[0];if(!file)return;
+ const lesson=verifiedLessons.find(x=>lessonKeyOf(x)===activeLessonKey);if(!lesson)return;
+ const signature=await file.slice(0,5).text().catch(()=> "");
+ if(!file.name.toLowerCase().endsWith(".pdf")&&signature!=="%PDF-"){$("guidePdfStatus").textContent="Selecciona un PDF válido de Elfin "+lesson.grade+" Teacher’s Guide.";return;}
+ try{await saveGuidePdfToBrowser(file,lesson.grade);if(guidePdfUrls[lesson.grade])URL.revokeObjectURL(guidePdfUrls[lesson.grade]);guidePdfBlobs[lesson.grade]=file;guidePdfUrls[lesson.grade]=URL.createObjectURL(file);$("guidePdfStatus").textContent="Elfin "+lesson.grade+" Teacher’s Guide guardado localmente. Ya puedes abrir sus páginas.";showGuidePdfPage(activePdfMode);}
+ catch(error){$("guidePdfStatus").textContent="No se pudo guardar el PDF en este navegador. Selecciónalo de nuevo e inténtalo otra vez.";}
+});
 $("showBookPdfBtn").addEventListener("click",()=>showGuidePdfPage("book"));
 $("showTeacherPdfBtn").addEventListener("click",()=>showGuidePdfPage("teacher"));
-
 const lessonProgressKey = "lqtLessonProgressV1";
 function readProgress(){try{return JSON.parse(localStorage.getItem(lessonProgressKey)||"{}")}catch(e){return {}}}
 function saveProgress(p){localStorage.setItem(lessonProgressKey,JSON.stringify(p))}
@@ -127,7 +146,13 @@ function openLessonDetails(key){
  $("extraActivities").innerHTML=extras.map(x=>'<article class="extra-activity"><strong>'+x.title+'</strong><span class="tag">'+x.desc+'</span><p>'+x.steps+'</p></article>').join("");
  document.querySelectorAll(".lesson-tab").forEach(b=>b.classList.toggle("active",b.dataset.tab==="guidePanel"));
  document.querySelectorAll(".lesson-tab-panel").forEach(p=>p.classList.toggle("hidden",p.id!=="guidePanel"));
- showView("lessonDetail");ensureLocalGuideLoaded().then(()=>showGuidePdfPage("book")).catch(()=>{});
+ $("guidePdfInput").value="";
+ const fileLabel=$("guidePdfInput").previousElementSibling.querySelector("strong");
+ const fileNote=$("guidePdfInput").previousElementSibling.querySelector("span");
+ fileLabel.textContent="Abrir Elfin "+l.grade+" Teacher’s Guide";
+ fileNote.textContent="Selecciona el PDF de Elfin "+l.grade+". Se guarda solo en este navegador, no se publica en GitHub.";
+ $("guidePdfFrame").classList.add("hidden");
+ showView("lessonDetail");ensureLocalGuideLoaded(l.grade).then(()=>showGuidePdfPage("book")).catch(()=>{});
 }
 document.querySelectorAll(".lesson-tab").forEach(btn=>btn.addEventListener("click",()=>{
  document.querySelectorAll(".lesson-tab").forEach(b=>b.classList.toggle("active",b===btn));
