@@ -1,10 +1,11 @@
-const CACHE_NAME = "lingoquest-teacher-v7";
+const CACHE_NAME = "lingoquest-teacher-v8";
 const APP_FILES = [
   "./",
   "./index.html",
   "./styles.css",
   "./app.js",
   "./data/elfin1-catalog.js",
+  "./data/elfin2-6-catalog.js",
   "./manifest.webmanifest",
   "./icons/icon-192.png",
   "./icons/icon-512.png",
