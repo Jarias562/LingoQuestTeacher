@@ -176,7 +176,39 @@
         </div>
         <div id="lessonHubGrid" class="library-grid"></div>
       </section>
-\n      <section id="libraryView" class="view hidden">
+\n
+      <section id="lessonDetailView" class="view hidden">
+        <div class="page-heading">
+          <p class="eyebrow">LECCIÓN SELECCIONADA</p>
+          <h2 id="detailTitle">Lección</h2>
+          <p id="detailSubtitle">Consulta el contenido docente y prepara tu clase.</p>
+          <button class="button button-outline" id="backToLessons" type="button">← Volver a las lecciones</button>
+        </div>
+        <div class="lesson-tabs" role="tablist" aria-label="Contenido de la lección">
+          <button class="lesson-tab active" type="button" data-tab="guidePanel">📖 Guía original</button>
+          <button class="lesson-tab" type="button" data-tab="planPanel">📝 Mi planeación</button>
+          <button class="lesson-tab" type="button" data-tab="extrasPanel">✨ Actividades extra</button>
+        </div>
+        <div id="guidePanel" class="lesson-tab-panel panel">
+          <div class="source-banner"><strong>Fuente principal: Teacher’s Guide</strong><span id="guidePages"></span></div>
+          <p class="muted">Los datos se basan en la guía docente identificada. Los elementos que no estén presentes en el extracto no se completan por suposición.</p>
+          <div id="guideContent" class="guide-content"></div>
+          <div class="notice">La imagen escaneada de la página original se añadirá aquí cuando el archivo de la guía se incorpore como recurso público de la aplicación. Por ahora, se muestra la información docente transcrita y verificada.</div>
+        </div>
+        <div id="planPanel" class="lesson-tab-panel panel hidden">
+          <h3>Planeación generada desde la guía</h3>
+          <p>La secuencia original se conserva. Las etapas adicionales se identifican como complementarias y no sustituyen el contenido del libro.</p>
+          <div id="planPreview" class="guide-content"></div>
+          <button class="button button-primary" id="generatePlanFromDetail" type="button">Generar planeación editable →</button>
+        </div>
+        <div id="extrasPanel" class="lesson-tab-panel panel hidden">
+          <h3>Actividades complementarias sugeridas</h3>
+          <p class="muted">Estas ideas son propuestas adicionales, no contenido literal del Teacher’s Guide.</p>
+          <div id="extraActivities" class="extra-activities"></div>
+        </div>
+      </section>
+
+      <section id="libraryView" class="view hidden">
         <div class="page-heading">
           <p class="eyebrow">CATÁLOGO DOCENTE</p>
           <h2>Biblioteca Elfin 1–6</h2>
