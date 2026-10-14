@@ -124,3 +124,9 @@
 .grade-guide-file{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;padding:9px 14px;border-radius:10px;background:#173d78;color:white;font-size:12px;font-weight:800;cursor:pointer}
 .grade-guide-file input{display:none}
 @media(max-width:650px){.grade-guide-upload{align-items:stretch;flex-direction:column;gap:10px}.grade-guide-file{min-height:40px}}
+
+/* Render actual Teacher's Guide pages inside the lesson, two pages at a time */
+.guide-pdf-pages{display:flex;flex-direction:column;gap:16px;margin-top:12px}
+.guide-page-card{background:#eef2f7;border:1px solid #d8e0eb;border-radius:12px;padding:8px;overflow:hidden}
+.guide-page-heading{font-size:12px;font-weight:800;color:#334155;padding:7px 5px 10px}
+.guide-page-canvas{display:block;width:100%;height:auto;background:white;border-radius:4px;box-shadow:0 2px 8px #14233f16}
