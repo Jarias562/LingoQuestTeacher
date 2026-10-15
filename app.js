@@ -1,10 +1,10 @@
 const gradeInfo = [
-  {id:"1", name:"1.º de primaria", book:"Elfin 1", icon:"🌱", color:"#e8f8ef", status:"En organización", desc:"Primer contacto con el inglés."},
-  {id:"2", name:"2.º de primaria", book:"Elfin 2", icon:"🧩", color:"#efedff", status:"En organización", desc:"Práctica y ampliación de bases."},
-  {id:"3", name:"3.º de primaria", book:"Elfin 3", icon:"🚀", color:"#e6f6ff", status:"En organización", desc:"Vocabulario y comunicación."},
-  {id:"4", name:"4.º de primaria", book:"Elfin 4", icon:"🧭", color:"#fff3dc", status:"En organización", desc:"Más gramática y expresión."},
-  {id:"5", name:"5.º de primaria", book:"Elfin 5", icon:"🏆", color:"#ffeaf0", status:"Pendiente de verificar", desc:"Catálogo por confirmar con los documentos."},
-  {id:"6", name:"6.º de primaria", book:"Elfin 6", icon:"🎓", color:"#e9efff", status:"Pendiente de verificar", desc:"Catálogo por confirmar con los documentos."}
+  {id:"1", name:"1.º de primaria", book:"Elfin 1", icon:"🌱", color:"#e8f8ef", status:"Completed", desc:"Catálogo de lecciones organizado; visor de guía disponible."},
+  {id:"2", name:"2.º de primaria", book:"Elfin 2", icon:"🧩", color:"#efedff", status:"In Progress", desc:"En proceso de verificar unidades, páginas y actividades."},
+  {id:"3", name:"3.º de primaria", book:"Elfin 3", icon:"🚀", color:"#e6f6ff", status:"In Progress", desc:"En proceso de verificar unidades, páginas y actividades."},
+  {id:"4", name:"4.º de primaria", book:"Elfin 4", icon:"🧭", color:"#fff3dc", status:"In Progress", desc:"En proceso de verificar unidades, páginas y actividades."},
+  {id:"5", name:"5.º de primaria", book:"Elfin 5", icon:"🏆", color:"#ffeaf0", status:"In Progress", desc:"Falta completar y verificar el catálogo con el Teacher’s Guide."},
+  {id:"6", name:"6.º de primaria", book:"Elfin 6", icon:"🎓", color:"#e9efff", status:"In Progress", desc:"Falta completar y verificar el catálogo con el Teacher’s Guide."}
 ];
 
 // Estos ejemplos provienen de información preliminar del proyecto y deben contrastarse con los archivos originales.
