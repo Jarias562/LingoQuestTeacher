@@ -1,4 +1,4 @@
-const CACHE_NAME = "lingoquest-teacher-v12";
+const CACHE_NAME = "lingoquest-teacher-v13";
 const APP_FILES = [
   "./",
   "./index.html",
