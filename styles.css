@@ -130,3 +130,32 @@
 .guide-page-card{background:#eef2f7;border:1px solid #d8e0eb;border-radius:12px;padding:8px;overflow:hidden}
 .guide-page-heading{font-size:12px;font-weight:800;color:#334155;padding:7px 5px 10px}
 .guide-page-canvas{display:block;width:100%;height:auto;background:white;border-radius:4px;box-shadow:0 2px 8px #14233f16}
+
+/* Asistencia y evaluación */
+.evaluation-toolbar{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:12px}
+.evaluation-toolbar label,.unit-indicator-grid label,.eval-notes-label,.roster-editor label{display:flex;flex-direction:column;gap:7px;font-size:13px;font-weight:750;color:#39465e}
+.evaluation-toolbar-actions{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.roster-editor{padding:14px;margin:12px 0;background:#f7f9fd;border:1px solid var(--line);border-radius:12px}
+.evaluation-table-wrap{overflow-x:auto;width:100%;margin:12px 0}
+.evaluation-table{width:100%;border-collapse:collapse;min-width:820px;font-size:12px}
+.evaluation-table th,.evaluation-table td{border:1px solid #d8e0eb;padding:8px;text-align:left;vertical-align:middle}
+.evaluation-table th{background:#173d78;color:white;font-weight:800}
+.evaluation-table tbody tr:nth-child(even){background:#f7f9fc}
+.evaluation-table select{min-width:118px;padding:8px;font-size:12px}
+.eval-student-name{font-weight:700;min-width:180px}
+.eval-notes-label{margin-top:14px}
+.unit-indicator-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px;margin:14px 0}
+.evaluation-report{margin-top:18px}
+.print-report{background:white;color:#172033;padding:10px}
+.print-report h2,.print-report h3{text-align:center;margin:5px 0}
+.print-report h4{margin:22px 0 8px;color:#173d78}
+.report-signature{margin-top:40px}
+@media(max-width:800px){.evaluation-toolbar,.unit-indicator-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){.evaluation-toolbar,.unit-indicator-grid{grid-template-columns:1fr}.evaluation-toolbar-actions .button{flex:1}}
+@media print{
+ body:has(#evaluationView:not(.hidden)) .topbar,body:has(#evaluationView:not(.hidden)) .sidebar,body:has(#evaluationView:not(.hidden)) .page-heading,body:has(#evaluationView:not(.hidden)) #evaluationView>.panel:not(:last-child),body:has(#evaluationView:not(.hidden)) #evaluationView>.panel:last-child>.section-heading,body:has(#evaluationView:not(.hidden)) #evaluationView>.panel:last-child>.evaluation-toolbar,body:has(#evaluationView:not(.hidden)) #evaluationView>.panel:last-child>.form-actions{display:none!important}
+ body:has(#evaluationView:not(.hidden)) #evaluationView{display:block!important}
+ body:has(#evaluationView:not(.hidden)) #evalReportPreview{display:block!important}
+ body:has(#evaluationView:not(.hidden)) .evaluation-table{min-width:0;font-size:9px}
+ body:has(#evaluationView:not(.hidden)) .evaluation-table th,body:has(#evaluationView:not(.hidden)) .evaluation-table td{padding:4px}
+}
