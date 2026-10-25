@@ -231,53 +231,30 @@
 
 
       <section id="evaluationView" class="view hidden">
-        <div class="page-heading">
-          <p class="eyebrow">SEGUIMIENTO DEL GRUPO</p>
-          <h2>Asistencia y evaluación</h2>
-          <p>Registra asistencia, trabajo y necesidad de apoyo en cada clase. Los indicadores adicionales se califican por unidad. La información se guarda localmente en este navegador.</p>
-        </div>
-        <div class="panel">
-          <div class="evaluation-toolbar">
-            <label>Grado<select id="evalGrade"><option value="1">1.º de primaria</option><option value="2" selected>2.º de primaria</option><option value="3">3.º de primaria</option><option value="4">4.º de primaria</option><option value="5">5.º de primaria</option><option value="6">6.º de primaria</option></select></label>
-            <label>Grupo<input id="evalGroup" value="1A" maxlength="10"></label>
-            <label>Fecha de clase <input id="evalDate" type="date"></label>
-            <label>Unidad <input id="evalUnit" placeholder="Ej. Unit 1 — Weather"></label>
-          </div>
-          <div class="evaluation-toolbar-actions"><button class="button button-outline" id="evalLoadBtn" type="button">Cargar lista</button><button class="button button-outline" id="evalRosterBtn" type="button">Editar lista de alumnos</button></div>
-          <div id="evalRosterEditor" class="hidden roster-editor"><label>Un alumno por línea<textarea id="evalRosterText" rows="8" placeholder="Escribe un nombre por línea"></textarea></label><button class="button button-primary" id="evalRosterSaveBtn" type="button">Guardar lista</button></div>
-          <p id="evalStatus" class="save-message" role="status">Selecciona el grado y la fecha de clase.</p>
-        </div>
-        <div class="panel">
-          <div class="section-heading compact"><h3>Registro diario</h3><span class="muted">Trabajo y apoyo en cada clase</span></div>
-          <p class="muted">Marca asistencia y el desempeño observado. Si no hay registro guardado para una fecha, no se cuenta como falta.</p>
-          <div class="evaluation-table-wrap"><table class="evaluation-table"><thead><tr><th>#</th><th>Alumno</th><th>Asistencia</th><th>Trabajo en clase</th><th>Necesidad de apoyo</th><th>Desempeño</th></tr></thead><tbody id="evalStudentRows"></tbody></table></div>
-          <label class="eval-notes-label">Observaciones de la clase<textarea id="evalClassNotes" rows="2" placeholder="Observaciones generales del grupo (opcional)"></textarea></label>
-          <div class="form-actions"><button class="button button-primary" id="evalSaveDayBtn" type="button">Guardar registro diario</button><button class="button button-outline" id="evalClearDayBtn" type="button">Limpiar marcas sin guardar</button></div>
-        </div>
-        <div class="panel">
-          <div class="section-heading compact"><h3>Indicadores por unidad</h3><span class="muted">Califica cuando termine o avances en la unidad</span></div>
-          <p class="muted">Usa la misma escala: Logrado, En proceso o Necesita apoyo. Estos indicadores no se solicitan en cada clase.</p>
-          <div class="unit-indicator-grid">
-            <label>Completa actividades<select id="unitActivities"><option value="">Sin evaluar</option><option>Logrado</option><option>En proceso</option><option>Necesita apoyo</option></select></label>
-            <label>Participación en inglés<select id="unitParticipation"><option value="">Sin evaluar</option><option>Logrado</option><option>En proceso</option><option>Necesita apoyo</option></select></label>
-            <label>Comprensión del vocabulario<select id="unitVocabulary"><option value="">Sin evaluar</option><option>Logrado</option><option>En proceso</option><option>Necesita apoyo</option></select></label>
-            <label>Comprensión de estructuras<select id="unitGrammar"><option value="">Sin evaluar</option><option>Logrado</option><option>En proceso</option><option>Necesita apoyo</option></select></label>
-            <label>Tareas y materiales<select id="unitTasks"><option value="">Sin evaluar</option><option>Logrado</option><option>En proceso</option><option>Necesita apoyo</option></select></label>
-            <label>Observaciones por alumno<textarea id="unitNotes" rows="2" placeholder="Fortalezas, avances o aspectos a reforzar"></textarea></label>
-          </div>
-          <button class="button button-primary" id="evalSaveUnitBtn" type="button">Guardar indicadores de la unidad</button>
-        </div>
-        <div class="panel">
-          <div class="section-heading compact"><h3>Reportes para dirección</h3><span class="muted">Vista previa e impresión</span></div>
-          <div class="evaluation-toolbar">
-            <label>Periodo<select id="evalPeriod"><option value="semester1">Semestre 1</option><option value="semester2">Semestre 2</option><option value="year">Ciclo escolar completo</option></select></label>
-            <label>Desde<input id="evalFrom" type="date"></label>
-            <label>Hasta<input id="evalTo" type="date"></label>
-          </div>
-          <div class="form-actions"><button class="button button-primary" id="evalReportBtn" type="button">Generar reporte / Enviar datos</button><button class="button button-outline" id="evalPrintBtn" type="button">Imprimir reporte</button><button class="button button-outline" id="evalExportBtn" type="button">Exportar respaldo JSON</button></div>
-          <div id="evalReportPreview" class="evaluation-report"><p class="muted">El reporte aparecerá aquí. “Enviar datos” prepara una vista previa; no envía información automáticamente a nadie.</p></div>
-        </div>
-      </section>
+ <div class="page-heading"><p class="eyebrow">CONTROL DE ASISTENCIA</p><h2>Asistencia</h2><p>Registra la asistencia diaria y genera una hoja mensual para imprimir. Los datos permanecen guardados en este navegador.</p></div>
+ <div class="panel">
+  <div class="evaluation-toolbar">
+   <label>Grado<select id="attGrade"><option value="1">1.º de primaria</option><option value="2" selected>2.º de primaria</option><option value="3">3.º de primaria</option><option value="4">4.º de primaria</option><option value="5">5.º de primaria</option><option value="6">6.º de primaria</option></select></label>
+   <label>Grupo<input id="attGroup" value="1A" maxlength="10"></label>
+   <label>Fecha de clase<input id="attDate" type="date"></label>
+   <label>Mes del reporte<input id="attMonth" type="month"></label>
+  </div>
+  <div class="evaluation-toolbar-actions"><button class="button button-outline" id="attRosterBtn" type="button">Editar lista de alumnos</button><button class="button button-outline" id="attLoadBtn" type="button">Cargar asistencia guardada</button></div>
+  <div id="attRosterEditor" class="hidden roster-editor"><label>Un alumno por línea<textarea id="attRosterText" rows="8" placeholder="Escribe un nombre por línea"></textarea></label><button class="button button-primary" id="attRosterSaveBtn" type="button">Guardar lista</button></div>
+  <p id="attStatus" class="save-message" role="status">Selecciona la fecha y marca la asistencia.</p>
+ </div>
+ <div class="panel">
+  <div class="section-heading compact"><h3>Lista de asistencia diaria</h3><span class="muted">Asistió / Faltó</span></div>
+  <div class="evaluation-table-wrap"><table class="evaluation-table"><thead><tr><th>#</th><th>Nombre del alumno</th><th>Asistencia</th></tr></thead><tbody id="attStudentRows"></tbody></table></div>
+  <div class="form-actions"><button class="button button-primary" id="attSaveBtn" type="button">Guardar asistencia</button><button class="button button-outline" id="attClearBtn" type="button">Limpiar marcas</button></div>
+ </div>
+ <div class="panel">
+  <div class="section-heading compact"><h3>Reporte mensual de asistencia</h3><span class="muted">Fechas en formato MM/DD/YYYY</span></div>
+  <p class="muted">Los días sin registro guardado quedan en blanco; no se cuentan como faltas.</p>
+  <div class="form-actions"><button class="button button-primary" id="attReportBtn" type="button">Generar reporte mensual</button><button class="button button-outline" id="attPrintBtn" type="button">Imprimir / Guardar PDF</button><button class="button button-outline" id="attExportBtn" type="button">Exportar respaldo</button></div>
+  <div id="attReportPreview" class="evaluation-report"></div>
+ </div>
+</section>
 
       <section id="libraryView" class="view hidden">
         <div class="page-heading">
@@ -325,6 +302,6 @@
   <script src="data/elfin1-catalog.js?v=15"></script>
   <script src="data/elfin2-6-catalog.js?v=15"></script>
   <script src="app.js?v=15"></script>
-  <script src="evaluation.js?v=15"></script>
+  <script src="attendance.js?v=17"></script>
 </body>
 </html>
