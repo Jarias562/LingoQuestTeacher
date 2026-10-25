@@ -167,35 +167,3 @@
  body:has(#evaluationView:not(.hidden)) .attendance-month-table th,body:has(#evaluationView:not(.hidden)) .attendance-month-table td{padding:2px}
 }
 
-/* Compact touch-friendly attendance controls */
-#evaluationView .evaluation-table{min-width:0;table-layout:fixed;width:100%}
-#evaluationView .evaluation-table th:first-child,#evaluationView .evaluation-table td:first-child{width:34px}
-#evaluationView .evaluation-table th:nth-child(2),#evaluationView .evaluation-table td:nth-child(2){width:46%}
-#evaluationView .evaluation-table th:nth-child(3),#evaluationView .evaluation-table td:nth-child(3){width:54%}
-#evaluationView .evaluation-table td{padding:6px 5px}
-#evaluationView .attendance-choice{display:flex;align-items:center;justify-content:flex-start;gap:8px;flex-wrap:wrap}
-#evaluationView .attendance-option{display:inline-flex;align-items:center;gap:4px;min-height:38px;cursor:pointer;font-size:12px;font-weight:650;white-space:nowrap}
-#evaluationView .attendance-option input{appearance:none;-webkit-appearance:none;width:19px;height:19px;min-width:19px;border:2px solid #71809a;border-radius:50%;margin:0;background:#fff;display:inline-grid;place-content:center}
-#evaluationView .attendance-option input:checked{border-color:#1d4c91}
-#evaluationView .attendance-option input:checked:before{content:"";width:9px;height:9px;border-radius:50%;background:#1d4c91}
-#evaluationView .attendance-option:has(input[value="Asistió"]:checked){color:#176b43}
-#evaluationView .attendance-option:has(input[value="Asistió"]:checked) input{border-color:#218653}
-#evaluationView .attendance-option:has(input[value="Asistió"]:checked) input:before{background:#218653}
-#evaluationView .attendance-option:has(input[value="Faltó"]:checked){color:#a52a2a}
-#evaluationView .attendance-option:has(input[value="Faltó"]:checked) input{border-color:#c43b3b}
-#evaluationView .attendance-option:has(input[value="Faltó"]:checked) input:before{background:#c43b3b}
-#evaluationView .attendance-reset{border:1px solid #cbd4e1;border-radius:8px;background:#f7f9fc;color:#46546a;padding:7px 9px;min-height:34px;font-size:11px;font-weight:750}
-#evaluationView .attendance-marked{background:#f5f9ff}
-@media(max-width:480px){
- #evaluationView .evaluation-table th:nth-child(2),#evaluationView .evaluation-table td:nth-child(2){width:42%}
- #evaluationView .evaluation-table th:nth-child(3),#evaluationView .evaluation-table td:nth-child(3){width:58%}
- #evaluationView .attendance-choice{gap:4px}
- #evaluationView .attendance-option{font-size:11px;min-height:34px;gap:3px}
- #evaluationView .attendance-option input{width:17px;height:17px;min-width:17px}
- #evaluationView .attendance-option input:checked:before{width:7px;height:7px}
- #evaluationView .attendance-reset{padding:6px 7px;min-height:30px}
-}
-@media print{
- #evaluationView .attendance-choice{display:block}
- #evaluationView .attendance-reset{display:none}
-}
