@@ -153,9 +153,16 @@
 @media(max-width:800px){.evaluation-toolbar,.unit-indicator-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:520px){.evaluation-toolbar,.unit-indicator-grid{grid-template-columns:1fr}.evaluation-toolbar-actions .button{flex:1}}
 @media print{
- body:has(#evaluationView:not(.hidden)) .topbar,body:has(#evaluationView:not(.hidden)) .sidebar,body:has(#evaluationView:not(.hidden)) .page-heading,body:has(#evaluationView:not(.hidden)) #evaluationView>.panel:not(:last-child),body:has(#evaluationView:not(.hidden)) #evaluationView>.panel:last-child>.section-heading,body:has(#evaluationView:not(.hidden)) #evaluationView>.panel:last-child>.evaluation-toolbar,body:has(#evaluationView:not(.hidden)) #evaluationView>.panel:last-child>.form-actions{display:none!important}
+ body:has(#evaluationView, body:has(#evaluationView:not(.hidden)) #evaluationView:not(.hidden)) .topbar,body:has(#evaluationView, body:has(#evaluationView:not(.hidden)) #evaluationView:not(.hidden)) .sidebar,body:has(#evaluationView, body:has(#evaluationView:not(.hidden)) #evaluationView:not(.hidden)) .page-heading,body:has(#evaluationView, body:has(#evaluationView:not(.hidden)) #evaluationView:not(.hidden)) #evaluationView, body:has(#evaluationView:not(.hidden)) #evaluationView>.panel:not(:last-child),body:has(#evaluationView, body:has(#evaluationView:not(.hidden)) #evaluationView:not(.hidden)) #evaluationView, body:has(#evaluationView:not(.hidden)) #evaluationView>.panel:last-child>.section-heading,body:has(#evaluationView, body:has(#evaluationView:not(.hidden)) #evaluationView:not(.hidden)) #evaluationView, body:has(#evaluationView:not(.hidden)) #evaluationView>.panel:last-child>.evaluation-toolbar,body:has(#evaluationView, body:has(#evaluationView:not(.hidden)) #evaluationView:not(.hidden)) #evaluationView, body:has(#evaluationView:not(.hidden)) #evaluationView>.panel:last-child>.form-actions{display:none!important}
+ body:has(#evaluationView, body:has(#evaluationView:not(.hidden)) #evaluationView:not(.hidden)) #evaluationView, body:has(#evaluationView:not(.hidden)) #evaluationView{display:block!important}
+ body:has(#evaluationView, body:has(#evaluationView:not(.hidden)) #evaluationView:not(.hidden)) #evalReportPreview{display:block!important}
+ body:has(#evaluationView, body:has(#evaluationView:not(.hidden)) #evaluationView:not(.hidden)) .evaluation-table{min-width:0;font-size:9px}
+ body:has(#evaluationView, body:has(#evaluationView:not(.hidden)) #evaluationView:not(.hidden)) .evaluation-table th,body:has(#evaluationView, body:has(#evaluationView:not(.hidden)) #evaluationView:not(.hidden)) .evaluation-table td{padding:4px}
+}
+@media print{
+ body:has(#evaluationView:not(.hidden)) .topbar,body:has(#evaluationView:not(.hidden)) .sidebar,body:has(#evaluationView:not(.hidden)) .page-heading,body:has(#evaluationView:not(.hidden)) #evaluationView>.panel:not(:last-child),body:has(#evaluationView:not(.hidden)) #evaluationView>.panel:last-child>.section-heading,body:has(#evaluationView:not(.hidden)) #evaluationView>.panel:last-child>p,body:has(#evaluationView:not(.hidden)) #evaluationView>.panel:last-child>.form-actions{display:none!important}
  body:has(#evaluationView:not(.hidden)) #evaluationView{display:block!important}
- body:has(#evaluationView:not(.hidden)) #evalReportPreview{display:block!important}
- body:has(#evaluationView:not(.hidden)) .evaluation-table{min-width:0;font-size:9px}
- body:has(#evaluationView:not(.hidden)) .evaluation-table th,body:has(#evaluationView:not(.hidden)) .evaluation-table td{padding:4px}
+ body:has(#evaluationView:not(.hidden)) #attReportPreview{display:block!important}
+ body:has(#evaluationView:not(.hidden)) .attendance-month-table{font-size:7px;min-width:0}
+ body:has(#evaluationView:not(.hidden)) .attendance-month-table th,body:has(#evaluationView:not(.hidden)) .attendance-month-table td{padding:2px}
 }
