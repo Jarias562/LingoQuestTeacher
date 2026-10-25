@@ -4,7 +4,7 @@ const APP_FILES = [
   "./index.html",
   "./styles.css",
   "./app.js",
-  "./evaluation.js",
+  "./attendance.js",
   "./data/elfin1-catalog.js",
   "./data/elfin2-6-catalog.js",
   "./manifest.webmanifest",
